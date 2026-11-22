@@ -71,18 +71,6 @@ export const CERTIFICATIONS_LIST: CertificationItem[] = [
     verifyUrl: 'https://learn.microsoft.com/users/flaviodejesus-6819/credentials/B4A548D6EE358418',
     featured: true,
   },
-  {
-    id: 'az-140',
-    code: 'AZ-140',
-    name: {
-      pt: 'Microsoft Certified: Azure Virtual Desktop Specialty',
-      en: 'Microsoft Certified: Azure Virtual Desktop Specialty',
-    },
-    category: 'role-based',
-    badgeLevel: 'specialist',
-    issuer: 'Microsoft',
-    featured: true,
-  },
 
   // 2. MCT & Applied Skills
   {

@@ -26,7 +26,7 @@ export const CertificationsSection: React.FC<CertificationsSectionProps> = ({
 
   const categories = useMemo(() => {
     return [
-      { id: 'all', label: language === 'en' ? 'All (20)' : 'Todas (20)' },
+      { id: 'all', label: language === 'en' ? `All (${CERTIFICATIONS_LIST.length})` : `Todas (${CERTIFICATIONS_LIST.length})` },
       { id: 'role-based', label: language === 'en' ? 'Microsoft Role-Based' : 'Microsoft Especialista' },
       { id: 'trainer-skills', label: 'MCT & Applied Skills' },
       { id: 'finops-architecture', label: language === 'en' ? 'Architecture, FinOps & AWS' : 'Arquitetura, FinOps & AWS' },
@@ -67,8 +67,8 @@ export const CertificationsSection: React.FC<CertificationsSectionProps> = ({
 
   const defaultSubtitle =
     language === 'en'
-      ? '20 validated professional credentials spanning Microsoft Azure Architect Expert, MCT, FinOps, Security, and Cloud Architecture.'
-      : '20 credenciais profissionais validadas abrangendo Microsoft Azure Architect Expert, MCT, FinOps, Segurança e Arquitetura de Nuvem.';
+      ? `${CERTIFICATIONS_LIST.length} validated professional credentials spanning Microsoft Azure Architect Expert, MCT, FinOps, Security, and Cloud Architecture.`
+      : `${CERTIFICATIONS_LIST.length} credenciais profissionais validadas abrangendo Microsoft Azure Architect Expert, MCT, FinOps, Segurança e Arquitetura de Nuvem.`;
 
   return (
     <section className={`py-16 ${className}`} id="certifications">
