@@ -4,6 +4,7 @@ interface CertificationBadgeProps {
   code: string;
   badgeLevel: 'expert' | 'associate' | 'trainer' | 'applied-skills' | 'architecture' | 'practitioner' | 'specialist' | 'fundamentals';
   issuer: 'Microsoft' | 'FinOps Foundation' | 'AWS' | 'ITXPRO' | 'Block 64';
+  badgeSvg?: string;
   className?: string;
 }
 
@@ -11,41 +12,26 @@ export const CertificationBadge: React.FC<CertificationBadgeProps> = ({
   code,
   badgeLevel,
   issuer,
+  badgeSvg,
   className = 'w-24 h-24',
 }) => {
-  // Color themes based on badge level and issuer
+  // If official Microsoft Learn SVG is provided, render the official Microsoft badge directly
+  if (badgeSvg) {
+    return (
+      <div className={`relative flex items-center justify-center p-1 ${className} select-none transition-transform hover:scale-105 duration-200`}>
+        <img
+          src={badgeSvg}
+          alt={`${issuer} ${code} Certification Badge`}
+          className="w-full h-full object-contain drop-shadow-md"
+          loading="lazy"
+        />
+      </div>
+    );
+  }
+
+  // High-fidelity vector badge for AWS, FinOps, TOGAF, Block 64, Applied Skills
   const getBadgeStyle = () => {
     switch (badgeLevel) {
-      case 'expert':
-        return {
-          gradient: 'from-[#002d62] via-[#005a9e] to-[#0078d4]',
-          accent: '#ffb900',
-          accentText: 'text-[#ffb900]',
-          border: 'border-[#ffb900]/60',
-          tierLabel: 'EXPERT',
-          tierBg: 'bg-gradient-to-r from-[#d97706] to-[#b45309]',
-          stars: 3,
-        };
-      case 'trainer':
-        return {
-          gradient: 'from-[#2e0854] via-[#4a154b] to-[#6b21a8]',
-          accent: '#facc15',
-          accentText: 'text-[#facc15]',
-          border: 'border-[#facc15]/70',
-          tierLabel: 'TRAINER',
-          tierBg: 'bg-gradient-to-r from-[#7e22ce] to-[#581c87]',
-          stars: 3,
-        };
-      case 'associate':
-        return {
-          gradient: 'from-[#003a70] via-[#0067b8] to-[#008ad7]',
-          accent: '#38bdf8',
-          accentText: 'text-[#38bdf8]',
-          border: 'border-[#38bdf8]/50',
-          tierLabel: 'ASSOCIATE',
-          tierBg: 'bg-gradient-to-r from-[#0284c7] to-[#0369a1]',
-          stars: 2,
-        };
       case 'applied-skills':
         return {
           gradient: 'from-[#064e3b] via-[#047857] to-[#0d9488]',
@@ -67,12 +53,23 @@ export const CertificationBadge: React.FC<CertificationBadgeProps> = ({
           stars: 2,
         };
       case 'architecture':
+        if (issuer === 'Block 64') {
+          return {
+            gradient: 'from-[#1e1b4b] via-[#312e81] to-[#2563eb]',
+            accent: '#93c5fd',
+            accentText: 'text-[#93c5fd]',
+            border: 'border-[#93c5fd]/50',
+            tierLabel: 'BLOCK 64 ARCHITECT',
+            tierBg: 'bg-gradient-to-r from-[#2563eb] to-[#1d4ed8]',
+            stars: 2,
+          };
+        }
         return {
           gradient: 'from-[#1e1b4b] via-[#312e81] to-[#4338ca]',
           accent: '#a5b4fc',
           accentText: 'text-[#a5b4fc]',
           border: 'border-[#a5b4fc]/50',
-          tierLabel: 'ARCHITECT',
+          tierLabel: 'ENTERPRISE ARCHITECT',
           tierBg: 'bg-gradient-to-r from-[#4f46e5] to-[#3730a3]',
           stars: 2,
         };
@@ -86,26 +83,14 @@ export const CertificationBadge: React.FC<CertificationBadgeProps> = ({
           tierBg: 'bg-gradient-to-r from-[#2563eb] to-[#1d4ed8]',
           stars: 2,
         };
-      case 'fundamentals':
       default:
-        if (issuer === 'AWS') {
-          return {
-            gradient: 'from-[#232f3e] via-[#131921] to-[#37475a]',
-            accent: '#ff9900',
-            accentText: 'text-[#ff9900]',
-            border: 'border-[#ff9900]/60',
-            tierLabel: 'AWS FOUNDATION',
-            tierBg: 'bg-gradient-to-r from-[#d97706] to-[#b45309]',
-            stars: 1,
-          };
-        }
         return {
-          gradient: 'from-[#0c4a6e] via-[#0284c7] to-[#0ea5e9]',
-          accent: '#bae6fd',
-          accentText: 'text-[#bae6fd]',
-          border: 'border-[#bae6fd]/50',
-          tierLabel: 'FUNDAMENTALS',
-          tierBg: 'bg-gradient-to-r from-[#0284c7] to-[#0369a1]',
+          gradient: 'from-[#232f3e] via-[#131921] to-[#37475a]',
+          accent: '#ff9900',
+          accentText: 'text-[#ff9900]',
+          border: 'border-[#ff9900]/60',
+          tierLabel: 'AWS CLOUD',
+          tierBg: 'bg-gradient-to-r from-[#d97706] to-[#b45309]',
           stars: 1,
         };
     }
@@ -156,7 +141,7 @@ export const CertificationBadge: React.FC<CertificationBadgeProps> = ({
 
       {/* Middle Code */}
       <div className="my-auto text-center px-1">
-        <div className="text-[13px] sm:text-[15px] font-extrabold tracking-tight leading-tight text-white drop-shadow-sm">
+        <div className="text-[13px] sm:text-[14px] font-extrabold tracking-tight leading-tight text-white drop-shadow-sm">
           {code}
         </div>
         <div className={`text-[8.5px] font-semibold uppercase tracking-wider ${style.accentText}`}>

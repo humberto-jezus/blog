@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import PostCard from '../components/PostCard';
 import ArticleContent from '../components/ArticleContent';
 import PageSectionsRenderer from '../components/PageSectionsRenderer';
-import { CertificationsSection } from '../components/CertificationsSection';
 import { ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { BlogPost, PageContent } from '../types';
@@ -133,9 +132,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-
-      {/* Official Certifications & Badges Section */}
-      <CertificationsSection className="bg-[#f3f5f8] border-b border-gray-200" />
 
       {/* Optional Editable Extra Content Block */}
       {homeConfig.extraContent?.trim() && (

@@ -143,6 +143,7 @@ export const CertificationsSection: React.FC<CertificationsSectionProps> = ({
                       code={cert.code}
                       badgeLevel={cert.badgeLevel}
                       issuer={cert.issuer}
+                      badgeSvg={cert.badgeSvg}
                       className="w-20 h-20"
                     />
                   </div>

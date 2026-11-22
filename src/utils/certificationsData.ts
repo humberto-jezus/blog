@@ -9,7 +9,7 @@ export interface CertificationItem {
   badgeLevel: 'expert' | 'associate' | 'trainer' | 'applied-skills' | 'architecture' | 'practitioner' | 'specialist' | 'fundamentals';
   issuer: 'Microsoft' | 'FinOps Foundation' | 'AWS' | 'ITXPRO' | 'Block 64';
   credentialId?: string;
-  verifyUrl?: string;
+  badgeSvg?: string;
   featured?: boolean;
 }
 
@@ -26,7 +26,7 @@ export const CERTIFICATIONS_LIST: CertificationItem[] = [
     badgeLevel: 'expert',
     issuer: 'Microsoft',
     credentialId: 'E023A2555C547121',
-    verifyUrl: 'https://learn.microsoft.com/users/flaviodejesus-6819/credentials/E023A2555C547121',
+    badgeSvg: '/badges/microsoft-certified-expert-badge.svg',
     featured: true,
   },
   {
@@ -40,7 +40,7 @@ export const CERTIFICATIONS_LIST: CertificationItem[] = [
     badgeLevel: 'associate',
     issuer: 'Microsoft',
     credentialId: 'D7ADCF4B9E39EB25',
-    verifyUrl: 'https://learn.microsoft.com/users/flaviodejesus-6819/credentials/D7ADCF4B9E39EB25',
+    badgeSvg: '/badges/microsoft-certified-associate-badge.svg',
     featured: true,
   },
   {
@@ -54,7 +54,7 @@ export const CERTIFICATIONS_LIST: CertificationItem[] = [
     badgeLevel: 'associate',
     issuer: 'Microsoft',
     credentialId: '922278D1BD0CB2CF',
-    verifyUrl: 'https://learn.microsoft.com/users/flaviodejesus-6819/credentials/922278D1BD0CB2CF',
+    badgeSvg: '/badges/microsoft-certified-associate-badge.svg',
     featured: true,
   },
   {
@@ -68,7 +68,7 @@ export const CERTIFICATIONS_LIST: CertificationItem[] = [
     badgeLevel: 'associate',
     issuer: 'Microsoft',
     credentialId: 'B4A548D6EE358418',
-    verifyUrl: 'https://learn.microsoft.com/users/flaviodejesus-6819/credentials/B4A548D6EE358418',
+    badgeSvg: '/badges/microsoft-certified-associate-badge.svg',
     featured: true,
   },
 
@@ -83,7 +83,7 @@ export const CERTIFICATIONS_LIST: CertificationItem[] = [
     category: 'trainer-skills',
     badgeLevel: 'trainer',
     issuer: 'Microsoft',
-    verifyUrl: 'https://learn.microsoft.com/users/flaviodejesus-6819/',
+    badgeSvg: '/badges/microsoft-certified-trainer-badge.svg',
     featured: true,
   },
   {
@@ -97,7 +97,6 @@ export const CERTIFICATIONS_LIST: CertificationItem[] = [
     badgeLevel: 'applied-skills',
     issuer: 'Microsoft',
     credentialId: 'C78B1DA5E8C01967',
-    verifyUrl: 'https://learn.microsoft.com/users/flaviodejesus-6819/credentials/C78B1DA5E8C01967',
   },
   {
     id: 'applied-azure-mgmt',
@@ -110,7 +109,6 @@ export const CERTIFICATIONS_LIST: CertificationItem[] = [
     badgeLevel: 'applied-skills',
     issuer: 'Microsoft',
     credentialId: 'E0BB78A7C0C1C7FD',
-    verifyUrl: 'https://learn.microsoft.com/users/flaviodejesus-6819/credentials/E0BB78A7C0C1C7FD',
   },
   {
     id: 'applied-ai-agents',
@@ -123,7 +121,6 @@ export const CERTIFICATIONS_LIST: CertificationItem[] = [
     badgeLevel: 'applied-skills',
     issuer: 'Microsoft',
     credentialId: '779EF79872A3F8D4',
-    verifyUrl: 'https://learn.microsoft.com/users/flaviodejesus-6819/credentials/779EF79872A3F8D4',
   },
 
   // 3. Arquitetura Corporativa, FinOps & AWS
@@ -228,7 +225,7 @@ export const CERTIFICATIONS_LIST: CertificationItem[] = [
     badgeLevel: 'fundamentals',
     issuer: 'Microsoft',
     credentialId: 'B312BE11A0BFE8B1',
-    verifyUrl: 'https://learn.microsoft.com/users/flaviodejesus-6819/credentials/B312BE11A0BFE8B1',
+    badgeSvg: '/badges/microsoft-certified-fundamentals-badge.svg',
     featured: true,
   },
   {
@@ -242,7 +239,7 @@ export const CERTIFICATIONS_LIST: CertificationItem[] = [
     badgeLevel: 'fundamentals',
     issuer: 'Microsoft',
     credentialId: '3D126D7D123FFDE0',
-    verifyUrl: 'https://learn.microsoft.com/users/flaviodejesus-6819/credentials/3D126D7D123FFDE0',
+    badgeSvg: '/badges/microsoft-certified-fundamentals-badge.svg',
   },
   {
     id: 'sc-900',
@@ -255,7 +252,7 @@ export const CERTIFICATIONS_LIST: CertificationItem[] = [
     badgeLevel: 'fundamentals',
     issuer: 'Microsoft',
     credentialId: '6A4E981F8E071896',
-    verifyUrl: 'https://learn.microsoft.com/users/flaviodejesus-6819/credentials/6A4E981F8E071896',
+    badgeSvg: '/badges/microsoft-certified-fundamentals-badge.svg',
     featured: true,
   },
   {
@@ -268,6 +265,6 @@ export const CERTIFICATIONS_LIST: CertificationItem[] = [
     category: 'fundamentals',
     badgeLevel: 'fundamentals',
     issuer: 'Microsoft',
-    verifyUrl: 'https://learn.microsoft.com/users/flaviodejesus-6819/',
+    badgeSvg: '/badges/microsoft-certified-fundamentals-badge.svg',
   },
 ];
