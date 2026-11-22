@@ -1,0 +1,94 @@
+{
+  "entities": {
+    "Post": {
+      "title": "Post",
+      "description": "A blog post.",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The title of the post."
+        },
+        "excerpt": {
+          "type": "string",
+          "description": "A short summary of the post."
+        },
+        "content": {
+          "type": "string",
+          "description": "The full markdown content of the post."
+        },
+        "category": {
+          "type": "string",
+          "description": "The category of the post."
+        },
+        "imageUrl": {
+          "type": "string",
+          "description": "The URL of the cover image."
+        },
+        "date": {
+          "type": "string",
+          "description": "The formatted date string."
+        },
+        "readTime": {
+          "type": "string",
+          "description": "Estimated read time."
+        },
+        "author": {
+          "type": "string",
+          "description": "The author's name."
+        },
+        "authorPhotoUrl": {
+          "type": "string",
+          "description": "The URL of the author's photo."
+        },
+        "authorUid": {
+          "type": "string",
+          "description": "The UID of the author."
+        },
+        "createdAt": {
+          "type": "timestamp",
+          "description": "The timestamp when the post was created."
+        },
+        "updatedAt": {
+          "type": "timestamp",
+          "description": "The timestamp when the post was last updated."
+        }
+      },
+      "required": ["title", "excerpt", "content", "category", "imageUrl", "date", "readTime", "author", "authorUid", "createdAt", "updatedAt"]
+    },
+    "Page": {
+      "title": "Page",
+      "description": "A static page content.",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The title of the page."
+        },
+        "content": {
+          "type": "string",
+          "description": "The HTML content of the page."
+        },
+        "updatedAt": {
+          "type": "timestamp",
+          "description": "The timestamp when the page was last updated."
+        }
+      },
+      "required": ["title", "content", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "/posts/{postId}": {
+      "schema": {
+        "$ref": "#/entities/Post"
+      },
+      "description": "The collection of blog posts."
+    },
+    "/pages/{pageId}": {
+      "schema": {
+        "$ref": "#/entities/Page"
+      },
+      "description": "The collection of static pages."
+    }
+  }
+}

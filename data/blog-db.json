@@ -1,0 +1,50 @@
+{
+  "posts": [
+    {
+      "id": "1",
+      "title": "Modernizando Infraestrutura com Azure Bicep",
+      "excerpt": "Saiba como usar o Azure Bicep para definir e implantar sua infraestrutura de nuvem como código com facilidade e precisão.",
+      "content": "<p>O Azure Bicep é uma linguagem específica de domínio (DSL) para implantar recursos do Azure de forma declarativa. Ele visa simplificar a experiência de criação, fornecendo uma sintaxe mais limpa, melhor modularidade e gerenciamento automático de dependências.</p><h2>Por que adotar Bicep?</h2><ul><li><strong>Sintaxe limpa e concisa</strong> em comparação aos templates ARM em JSON.</li><li><strong>Modularidade nativa</strong> para reutilizar padrões corporativos de segurança e rede.</li><li><strong>Validação imediata</strong> com suporte completo no VS Code e pipelines Azure DevOps / GitHub Actions.</li></ul>",
+      "category": "DevOps",
+      "imageUrl": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1000",
+      "date": "2024-03-15",
+      "readTime": "8 min de leitura",
+      "author": "Humberto Jezus",
+      "authorUid": "admin-humberto",
+      "language": "pt",
+      "createdAt": "2024-03-15T10:00:00.000Z",
+      "updatedAt": "2024-03-15T10:00:00.000Z"
+    },
+    {
+      "id": "2",
+      "title": "Azure AI Services: Um Mergulho Profundo",
+      "excerpt": "Explore os últimos avanços nos Serviços de IA do Azure e como eles podem transformar seus aplicativos com recursos inteligentes.",
+      "content": "<p>O Microsoft Azure oferece um conjunto abrangente de serviços de IA que permitem aos desenvolvedores criar aplicativos inteligentes com segurança corporativa, governança de dados e alta escalabilidade.</p><h2>Principais cenários corporativos</h2><ul><li><strong>Visão e Document Intelligence</strong> para automação de documentos e faturas.</li><li><strong>Azure OpenAI e AI Foundry</strong> integrados com Private Endpoints e Entra ID.</li><li><strong>Observabilidade e FinOps</strong> para controlar consumo e latência em produção.</li></ul>",
+      "category": "AI & Machine Learning",
+      "imageUrl": "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=1000",
+      "date": "2024-03-10",
+      "readTime": "12 min de leitura",
+      "author": "Humberto Jezus",
+      "authorUid": "admin-humberto",
+      "language": "pt",
+      "createdAt": "2024-03-10T10:00:00.000Z",
+      "updatedAt": "2024-03-10T10:00:00.000Z"
+    }
+  ],
+  "pages": {
+    "home": {
+      "id": "home",
+      "title": "Humberto Jezus",
+      "content": "<p>Arquiteto de Soluções Cloud. Compartilhando experiências reais, tutoriais práticos e a jornada no Microsoft Azure.</p>",
+      "isSystem": true,
+      "updatedAt": "2024-03-15T10:00:00.000Z"
+    },
+    "about": {
+      "id": "about",
+      "title": "Sobre Mim",
+      "content": "<p>Este blog é dedicado a compartilhar conhecimento sobre Microsoft Azure, ajudando profissionais a navegarem no complexo mundo da computação em nuvem.</p>",
+      "isSystem": true,
+      "updatedAt": "2024-03-15T10:00:00.000Z"
+    }
+  }
+}
