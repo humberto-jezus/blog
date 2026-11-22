@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif; }
+  body {
+    background: #f8fafc;
+    width: 1440px;
+    height: 840px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #1e293b;
+  }
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 16px;
+  }
+  .title-group h1 {
+    font-size: 24px;
+    font-weight: 800;
+    color: #0f172a;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .title-group p {
+    font-size: 13px;
+    color: #64748b;
+    margin-top: 4px;
+    font-weight: 500;
+  }
+  .badge-tag {
+    background: #0078d4;
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .author-badge {
+    text-align: right;
+    font-size: 12px;
+    color: #475569;
+  }
+  .author-badge strong {
+    font-size: 14px;
+    color: #0078d4;
+    display: block;
+  }
+
+  /* Main Canvas */
+  .canvas {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 24px;
+    flex: 1;
+    margin-top: 20px;
+  }
+
+  /* External Panel */
+  .external-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 18px;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+  }
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #334155;
+    margin-bottom: 10px;
+  }
+  .card-body {
+    font-size: 12px;
+    color: #64748b;
+    line-height: 1.5;
+  }
+  .pill {
+    display: inline-block;
+    padding: 2px 8px;
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-family: Consolas, monospace;
+    font-size: 11px;
+    color: #0f172a;
+    font-weight: 600;
+  }
+
+  /* Azure Cloud Box */
+  .azure-cloud {
+    background: white;
+    border: 2px solid #0078d4;
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: relative;
+    box-shadow: 0 10px 15px -3px rgba(0, 120, 212, 0.08);
+  }
+  .cloud-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    font-weight: 700;
+    color: #0078d4;
+  }
+  .region-tag {
+    background: #e0f2fe;
+    color: #0284c7;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 6px;
+  }
+
+  /* Resource Group Box */
+  .rg-box {
+    background: #f8fafc;
+    border: 1.5px dashed #0284c7;
+    border-radius: 14px;
+    padding: 16px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .rg-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #0369a1;
+  }
+
+  .rg-grid {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    gap: 18px;
+    flex: 1;
+  }
+
+  /* CAE Box */
+  .cae-box {
+    background: white;
+    border: 1.5px solid #38bdf8;
+    border-radius: 12px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .cae-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: #0284c7;
+  }
+  .container-app-box {
+    background: #f0f9ff;
+    border: 1.5px solid #0078d4;
+    border-radius: 10px;
+    padding: 14px;
+  }
+
+  /* Storage Box */
+  .storage-box {
+    background: white;
+    border: 1.5px solid #10b981;
+    border-radius: 12px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .storage-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: #059669;
+  }
+
+  /* Footer Specs */
+  .footer-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    background: #0f172a;
+    color: white;
+    padding: 14px 22px;
+    border-radius: 12px;
+    font-size: 11.5px;
+  }
+  .spec-item strong {
+    display: block;
+    color: #38bdf8;
+    font-size: 12.5px;
+    margin-bottom: 2px;
+  }
+</style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="title-group">
+      <h1>
+        <img src="data:image/svg+xml;base64,PHN2ZyBpZD0iYmMxOGJhZGUtNTQ4MS00NDdlLWE5NTktNjU5ZDcyMzQ2NDc0IgogICAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCI+CiAgICA8ZGVmcz4KICAgICAgICA8cmFkaWFsR3JhZGllbnQgaWQ9ImE0NDVjNzE3LTlkNzUtNDRjNy1iYTZiLTBkOGYyMzgzZTU2MCIgY3g9Ii0zNi42MyIgY3k9IjE3LjEyIiByPSIxMS4xOCIgZ3JhZGllbnRUcmFuc2Zvcm09InRyYW5zbGF0ZSg0MS44OCAtNy40KSBzY2FsZSgwLjk0IDAuOTQpIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CiAgICAgICAgICAgIDxzdG9wIG9mZnNldD0iMC4yNyIgc3RvcC1jb2xvcj0iI2ZmZDcwZiIvPgogICAgICAgICAgICA8c3RvcCBvZmZzZXQ9IjAuNDkiIHN0b3AtY29sb3I9IiNmZmNiMTIiLz4KICAgICAgICAgICAgPHN0b3Agb2Zmc2V0PSIwLjg4IiBzdG9wLWNvbG9yPSIjZmVhYzE5Ii8+CiAgICAgICAgICAgIDxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2ZlYTExYiIvPgogICAgICAgIDwvcmFkaWFsR3JhZGllbnQ+CiAgICA8L2RlZnM+CiAgICA8dGl0bGU+SWNvbi1nZW5lcmFsLTI8L3RpdGxlPgogICAgPHBhdGggaWQ9ImUzZDFlNThjLWY3OGUtNGZiNS05ODU3LTBjOTMzMWRhOTk3OSIgZD0iTTEzLjU2LDcuMTlhMi4wNywyLjA3LDAsMCwwLDAtMi45M2gwTDEwLC42OWEyLjA2LDIuMDYsMCwwLDAtMi45MiwwaDBMMy41Miw0LjI2YTIuMDksMi4wOSwwLDAsMCwwLDIuOTNsMywzYS42MS42MSwwLDAsMSwuMTcuNDF2NS41MmEuNy43LDAsMCwwLC4yLjVsMS4zNSwxLjM1YS40NS40NSwwLDAsMCwuNjYsMGwxLjMxLTEuMzFoMGwuNzctLjc3YS4yNi4yNiwwLDAsMCwwLS4zOGwtLjU1LS41NmEuMjkuMjksMCwwLDEsMC0uNDJsLjU1LS41NmEuMjYuMjYsMCwwLDAsMC0uMzhMMTAuNCwxM2EuMjguMjgsMCwwLDEsMC0uNDFMMTEsMTJhLjI2LjI2LDAsMCwwLDAtLjM4bC0uNzctLjc4di0uMjhabS01LTUuNjRBMS4xOCwxLjE4LDAsMSwxLDcuMzcsMi43MywxLjE3LDEuMTcsMCwwLDEsOC41NCwxLjU1WiIgZmlsbD0idXJsKCNhNDQ1YzcxNy05ZDc1LTQ0YzctYmE2Yi0wZDhmMjM4M2U1NjApIi8+CiAgICA8cGF0aCBpZD0iYTIxYThmN2EtNjFjYy00MDM1LTg0NDktZTVjOGZlNGQ0ZDVlIiBkPSJNNy42MiwxNi4yMWgwQS4yNS4yNSwwLDAsMCw4LDE2VjExLjU1YS4yNy4yNywwLDAsMC0uMTEtLjIyaDBhLjI1LjI1LDAsMCwwLS4zOS4yMlYxNkEuMjcuMjcsMCwwLDAsNy42MiwxNi4yMVoiIGZpbGw9IiNmZjkzMDAiIG9wYWNpdHk9IjAuNzUiLz4KICAgIDxyZWN0IGlkPSJlY2QzMTg5Yy1mYjFlLTRhMGUtYTJiNi1iYTJmMTFkZGE0ODQiIHg9IjUuNjkiIHk9IjUuNDUiIHdpZHRoPSI1Ljg2IiBoZWlnaHQ9IjAuNjkiIHJ4PSIwLjMyIiBmaWxsPSIjZmY5MzAwIiBvcGFjaXR5PSIwLjc1Ii8+CiAgICA8cmVjdCBpZD0iYTE5NDlhM2MtNDgxOC00YmQxLWIyMzYtMGQ5NzBiOTJmYzYyIiB4PSI1LjY5IiB5PSI2LjU3IiB3aWR0aD0iNS44NiIgaGVpZ2h0PSIwLjY5IiByeD0iMC4zMiIgZmlsbD0iI2ZmOTMwMCIgb3BhY2l0eT0iMC43NSIvPgo8L3N2Zz4K" width="28" height="28" style="vertical-align: middle;"/>
+        Arquitetura Serverless em Produção com Custo Zero (FinOps)
+        <span class="badge-tag">Microsoft Azure</span>
+      </h1>
+      <p>Azure Container Apps (Consumption) + Azure Files Persistent SMB Mount + Managed TLS + GitHub Actions</p>
+    </div>
+    <div class="author-badge">
+      <strong>Humberto Jezus</strong>
+      Enterprise Cloud Architect &amp; MCT | humbertojezus-techblog.com
+    </div>
+  </div>
+
+  <!-- Main Canvas -->
+  <div class="canvas">
+
+    <!-- Left Column: External Clients & CI/CD -->
+    <div class="external-panel">
+      
+      <!-- Users & DNS -->
+      <div class="card">
+        <div class="card-header">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0078d4" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          Internet &amp; Custom DNS
+        </div>
+        <div class="card-body">
+          <p><strong>Tráfego Web Seguro (HTTPS / 443)</strong></p>
+          <div style="margin: 8px 0; display: flex; flex-direction: column; gap: 4px;">
+            <span class="pill">www.humbertojezus-techblog.com</span>
+            <span class="pill">humbertojezus-techblog.com</span>
+          </div>
+          <p style="color: #10b981; font-weight: 700; margin-top: 6px;">✓ Certificado SSL/TLS Gerenciado Gratuito</p>
+          <p style="font-size: 11px; color: #94a3b8; margin-top: 2px;">Renovação 100% automatizada pela Microsoft</p>
+        </div>
+      </div>
+
+      <!-- GitHub Actions CI/CD -->
+      <div class="card">
+        <div class="card-header">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="#24292f"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub Actions CI/CD
+        </div>
+        <div class="card-body">
+          <p><strong>Repositório:</strong> <span class="pill">humberto-jezus/blog</span></p>
+          <p style="margin-top: 4px;"><strong>Trigger:</strong> Push na branch <span class="pill">main</span></p>
+          <p style="margin-top: 4px;"><strong>Docker:</strong> Multi-Stage Build (Node 22)</p>
+          <div style="margin-top: 8px; padding: 8px; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 6px; font-size: 11px; color: #1e40af;">
+            <strong>Microsoft Entra ID:</strong> Service Principal restrito ao Resource Group (PoLP - Menor Privilégio).
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right: Azure Region & Resource Group -->
+    <div class="azure-cloud">
+      
+      <div class="cloud-header">
+        <span style="display: flex; align-items: center; gap: 8px;">
+          <img src="data:image/svg+xml;base64,PHN2ZyBpZD0iYmMxOGJhZGUtNTQ4MS00NDdlLWE5NTktNjU5ZDcyMzQ2NDc0IgogICAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCI+CiAgICA8ZGVmcz4KICAgICAgICA8cmFkaWFsR3JhZGllbnQgaWQ9ImE0NDVjNzE3LTlkNzUtNDRjNy1iYTZiLTBkOGYyMzgzZTU2MCIgY3g9Ii0zNi42MyIgY3k9IjE3LjEyIiByPSIxMS4xOCIgZ3JhZGllbnRUcmFuc2Zvcm09InRyYW5zbGF0ZSg0MS44OCAtNy40KSBzY2FsZSgwLjk0IDAuOTQpIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CiAgICAgICAgICAgIDxzdG9wIG9mZnNldD0iMC4yNyIgc3RvcC1jb2xvcj0iI2ZmZDcwZiIvPgogICAgICAgICAgICA8c3RvcCBvZmZzZXQ9IjAuNDkiIHN0b3AtY29sb3I9IiNmZmNiMTIiLz4KICAgICAgICAgICAgPHN0b3Agb2Zmc2V0PSIwLjg4IiBzdG9wLWNvbG9yPSIjZmVhYzE5Ii8+CiAgICAgICAgICAgIDxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2ZlYTExYiIvPgogICAgICAgIDwvcmFkaWFsR3JhZGllbnQ+CiAgICA8L2RlZnM+CiAgICA8dGl0bGU+SWNvbi1nZW5lcmFsLTI8L3RpdGxlPgogICAgPHBhdGggaWQ9ImUzZDFlNThjLWY3OGUtNGZiNS05ODU3LTBjOTMzMWRhOTk3OSIgZD0iTTEzLjU2LDcuMTlhMi4wNywyLjA3LDAsMCwwLDAtMi45M2gwTDEwLC42OWEyLjA2LDIuMDYsMCwwLDAtMi45MiwwaDBMMy41Miw0LjI2YTIuMDksMi4wOSwwLDAsMCwwLDIuOTNsMywzYS42MS42MSwwLDAsMSwuMTcuNDF2NS41MmEuNy43LDAsMCwwLC4yLjVsMS4zNSwxLjM1YS40NS40NSwwLDAsMCwuNjYsMGwxLjMxLTEuMzFoMGwuNzctLjc3YS4yNi4yNiwwLDAsMCwwLS4zOGwtLjU1LS41NmEuMjkuMjksMCwwLDEsMC0uNDJsLjU1LS41NmEuMjYuMjYsMCwwLDAsMC0uMzhMMTAuNCwxM2EuMjguMjgsMCwwLDEsMC0uNDFMMTEsMTJhLjI2LjI2LDAsMCwwLDAtLjM4bC0uNzctLjc4di0uMjhabS01LTUuNjRBMS4xOCwxLjE4LDAsMSwxLDcuMzcsMi43MywxLjE3LDEuMTcsMCwwLDEsOC41NCwxLjU1WiIgZmlsbD0idXJsKCNhNDQ1YzcxNy05ZDc1LTQ0YzctYmE2Yi0wZDhmMjM4M2U1NjApIi8+CiAgICA8cGF0aCBpZD0iYTIxYThmN2EtNjFjYy00MDM1LTg0NDktZTVjOGZlNGQ0ZDVlIiBkPSJNNy42MiwxNi4yMWgwQS4yNS4yNSwwLDAsMCw4LDE2VjExLjU1YS4yNy4yNywwLDAsMC0uMTEtLjIyaDBhLjI1LjI1LDAsMCwwLS4zOS4yMlYxNkEuMjcuMjcsMCwwLDAsNy42MiwxNi4yMVoiIGZpbGw9IiNmZjkzMDAiIG9wYWNpdHk9IjAuNzUiLz4KICAgIDxyZWN0IGlkPSJlY2QzMTg5Yy1mYjFlLTRhMGUtYTJiNi1iYTJmMTFkZGE0ODQiIHg9IjUuNjkiIHk9IjUuNDUiIHdpZHRoPSI1Ljg2IiBoZWlnaHQ9IjAuNjkiIHJ4PSIwLjMyIiBmaWxsPSIjZmY5MzAwIiBvcGFjaXR5PSIwLjc1Ii8+CiAgICA8cmVjdCBpZD0iYTE5NDlhM2MtNDgxOC00YmQxLWIyMzYtMGQ5NzBiOTJmYzYyIiB4PSI1LjY5IiB5PSI2LjU3IiB3aWR0aD0iNS44NiIgaGVpZ2h0PSIwLjY5IiByeD0iMC4zMiIgZmlsbD0iI2ZmOTMwMCIgb3BhY2l0eT0iMC43NSIvPgo8L3N2Zz4K" width="22" height="22"/>
+          Microsoft Azure – MSDN Platforms Subscription
+        </span>
+        <span class="region-tag">Region: East US 2 (Virginia)</span>
+      </div>
+
+      <!-- Resource Group -->
+      <div class="rg-box">
+        
+        <div class="rg-header">
+          <img src="data:image/svg+xml;base64,PHN2ZyBpZD0iYTY4NWNjOGMtMzJiYS00ZDU0LTkxZGEtM2ExMjVjYjU4ZGVkIiAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCI+CiAgPHRpdGxlPkljb24tZ2VuZXJhbC03PC90aXRsZT4KICA8Zz4KICAgIDxnPgogICAgICA8cGF0aCBkPSJNLjUsMTUuMDhhLjE2LjE2LDAsMCwwLC4wOC4xNGwxLjE2LjY1TDMuNywxN2EuMTcuMTcsMCwwLDAsLjIzLS4wNmwuNjYtMS4xMmEuMTYuMTYsMCwwLDAtLjA2LS4yMWwtMi4zLTEuM2EuMTcuMTcsMCwwLDEtLjA4LS4xNFYzLjg1YS4xNi4xNiwwLDAsMSwuMDgtLjE0bDIuMy0xLjNhLjE2LjE2LDAsMCwwLC4wNi0uMjFMMy45MywxLjA4QS4xNy4xNywwLDAsMCwzLjcsMUwxLjc4LDIuMTFsLTEuMi42N2EuMTYuMTYsMCwwLDAtLjA4LjE0VjE1LjA4WiIgZmlsbD0iIzk0OTQ5NCIvPgogICAgICA8cGF0aCBkPSJNMi4xNCwzLjc3bC4wNi0uMDYsMi4zLTEuM2EuMTQuMTQsMCwwLDAsLjA2LS4yMUwzLjksMS4wOEEuMTUuMTUsMCwwLDAsMy42OCwxTDEuNzUsMi4xMS41NiwyLjc4cy0uMDUsMC0uMDYuMDZsLjkuNTFaIiBmaWxsPSIjYTNhM2EzIi8+CiAgICAgIDxwYXRoIGQ9Ik00LjUsMTUuNTlsLTIuMy0xLjNhLjIyLjIyLDAsMCwxLS4wNy0uMDlsLTEuNjIsMSwuMDUsMCwxLjE1LjY1LDIsMS4xMWEuMTUuMTUsMCwwLDAsLjIyLS4wNmwuNjYtMS4xMkEuMTQuMTQsMCwwLDAsNC41LDE1LjU5WiIgZmlsbD0iI2EzYTNhMyIvPgogICAgPC9nPgogICAgPHBhdGggZD0iTTE3LjUsMTUuMDhhLjE2LjE2LDAsMCwxLS4wOC4xNGwtMS4xNi42NUwxNC4zLDE3YS4xNy4xNywwLDAsMS0uMjMtLjA2bC0uNjYtMS4xMmEuMTYuMTYsMCwwLDEsLjA2LS4yMWwyLjMtMS4zYS4xNy4xNywwLDAsMCwuMDgtLjE0VjMuODVhLjE2LjE2LDAsMCwwLS4wOC0uMTRsLTIuMy0xLjNhLjE2LjE2LDAsMCwxLS4wNi0uMjFsLjY2LTEuMTJBLjE3LjE3LDAsMCwxLDE0LjMsMWwxLjkyLDEuMDksMS4yLjY3YS4xNi4xNiwwLDAsMSwuMDguMTRWMTUuMDhaIiBmaWxsPSIjOTQ5NDk0Ii8+CiAgICA8cGF0aCBkPSJNMTUuODYsMy43N2wtLjA2LS4wNi0yLjMtMS4zYS4xNC4xNCwwLDAsMS0uMDYtLjIxbC42Ni0xLjEyQS4xNS4xNSwwLDAsMSwxNC4zMiwxbDEuOTMsMS4wOSwxLjE5LjY3czAsMCwuMDYuMDZsLS45LjUxWiIgZmlsbD0iI2EzYTNhMyIvPgogICAgPHBhdGggZD0iTTEzLjUsMTUuNTlsMi4zLTEuM2EuMjIuMjIsMCwwLDAsLjA3LS4wOWwxLjYyLDEsMCwwLTEuMTUuNjUtMiwxLjExYS4xNS4xNSwwLDAsMS0uMjItLjA2bC0uNjYtMS4xMkEuMTQuMTQsMCwwLDEsMTMuNSwxNS41OVoiIGZpbGw9IiNhM2EzYTMiLz4KICAgIDxwb2x5Z29uIHBvaW50cz0iMTQuMzEgNS45MyAxNC4zMSAxMi4wNyA4Ljk5IDE1LjE2IDguOTkgOS4wMSAxNC4zMSA1LjkzIiBmaWxsPSIjMzJiZWRkIi8+CiAgICA8cG9seWdvbiBwb2ludHM9IjE0LjMxIDUuOTMgOSA5LjAyIDMuNjggNS45MyA5IDIuODQgMTQuMzEgNS45MyIgZmlsbD0iIzljZWJmZiIvPgogICAgPHBvbHlnb24gcG9pbnRzPSI4Ljk5IDkuMDIgOC45OSAxNS4xNiAzLjY4IDEyLjA3IDMuNjggNS45MyA4Ljk5IDkuMDIiIGZpbGw9IiM1MGU2ZmYiLz4KICAgIDxwb2x5Z29uIHBvaW50cz0iMy42OCAxMi4wNyA4Ljk5IDkuMDEgOC45OSAxNS4xNiAzLjY4IDEyLjA3IiBmaWxsPSIjOWNlYmZmIi8+CiAgICA8cG9seWdvbiBwb2ludHM9IjE0LjMxIDEyLjA3IDguOTkgOS4wMSA4Ljk5IDE1LjE2IDE0LjMxIDEyLjA3IiBmaWxsPSIjNTBlNmZmIi8+CiAgPC9nPgo8L3N2Zz4K" width="22" height="22"/>
+          Resource Group: rg-blog-humberto-prod-eus2
+          <span style="margin-left: auto; font-size: 11.5px; background: #e0f2fe; color: #0369a1; padding: 3px 10px; border-radius: 6px; font-weight: 700;">
+            💰 Custo Estimado: R$ 0,00 / mês
+          </span>
+        </div>
+
+        <div class="rg-grid">
+          
+          <!-- CAE Column -->
+          <div class="cae-box">
+            <div class="cae-header">
+              <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDI2LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9ImZkM2Q4ZDRhLTQ2ZTEtNDQwOC1iYTFlLTkxMzVhN2UzNGM0OSIKCSB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDE4IDE4IgoJIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDE4IDE4OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGw6Izk0OTQ5NDt9Cgkuc3Qxe2ZpbGw6dXJsKCNTVkdJRF8xXyk7fQoJLnN0MntmaWxsOiM1NTJGOTk7fQoJLnN0M3tvcGFjaXR5OjAuNzU7ZmlsbDojQjc3QUY0O2VuYWJsZS1iYWNrZ3JvdW5kOm5ldyAgICA7fQo8L3N0eWxlPgo8cGF0aCBjbGFzcz0ic3QwIiBkPSJNOC42LDguN0gxVjIuMmMwLTAuNiwwLjUtMS4xLDEuMS0xLjFoNi41VjguN3ogTTEuOSw3LjhoNS43VjJIMi4xQzIsMiwxLjksMi4xLDEuOSwyLjJsMCwwTDEuOSw3Ljh6Ii8+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xNyw4LjdIOS40VjEuMWg2LjVjMC42LDAsMS4xLDAuNSwxLjEsMS4xVjguN3ogTTEwLjQsNy43aDUuN1YyLjJjMC0wLjEsMC0wLjItMC4xLTAuMmMwLDAsMCwwLDAsMGgtNS41VjcuN3oiCgkvPgo8cGF0aCBjbGFzcz0ic3QwIiBkPSJNOC42LDE3LjFIMi4xQzEuNSwxNy4xLDEsMTYuNiwxLDE2VjkuNWg3LjZWMTcuMXogTTEuOSwxMC40VjE2YzAsMC4xLDAuMSwwLjEsMC4yLDAuMWg1LjV2LTUuN0gxLjl6Ii8+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xNS45LDE3LjFIOS40VjkuNUgxN1YxNkMxNywxNi42LDE2LjUsMTcuMSwxNS45LDE3LjF6IE0xMC40LDE2LjFoNS41YzAuMSwwLDAuMS0wLjEsMC4xLTAuMXYtNS42aC01LjdWMTYuMXoiCgkvPgo8ZyBpZD0iYWJhMTZjOWEtNjFjNi00MjIxLWE4MTktYTM0ZWQwNTY4ZDY5Ij4KCTxnPgoJCQoJCQk8bGluZWFyR3JhZGllbnQgaWQ9IlNWR0lEXzFfIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjExLjI0MjciIHkxPSI2LjcxNzgiIHgyPSIxMS4yNDI3IiB5Mj0iMTQuODg2NiIgZ3JhZGllbnRUcmFuc2Zvcm09Im1hdHJpeCgxIDAgMCAtMSAwIDIwKSI+CgkJCTxzdG9wICBvZmZzZXQ9IjAiIHN0eWxlPSJzdG9wLWNvbG9yOiM3NzNBREMiLz4KCQkJPHN0b3AgIG9mZnNldD0iMSIgc3R5bGU9InN0b3AtY29sb3I6I0I3N0FGNCIvPgoJCTwvbGluZWFyR3JhZGllbnQ+CgkJPHBhdGggY2xhc3M9InN0MSIgZD0iTTEzLjcsNi45YzAtMC4xLTAuMS0wLjItMC4yLTAuMkw5LDUuMWMwLDAsMCwwLDAsMGgwYy0wLjEsMC0wLjEsMC4xLTAuMSwwLjF2Ny45YzAsMC4xLDAuMSwwLjEsMC4xLDAuMWwwLDAKCQkJYzAsMCwwLDAsMCwwbDQuNS0xLjhjMC4xLDAsMC4yLTAuMSwwLjItMC4yVjYuOXoiLz4KCQk8cGF0aCBjbGFzcz0ic3QyIiBkPSJNOC45LDUuMUw0LjUsNS45QzQuNCw1LjksNC40LDYsNC40LDYuMXY2LjFjMCwwLjEsMCwwLjEsMC4xLDAuMWw0LjUsMC45YzAuMSwwLDAuMSwwLDAuMi0wLjFjMCwwLDAsMCwwLDAKCQkJVjUuMkM5LjEsNS4yLDksNS4xLDguOSw1LjFDOC45LDUuMSw4LjksNS4xLDguOSw1LjF6Ii8+CgkJPHBvbHlnb24gY2xhc3M9InN0MyIgcG9pbnRzPSI2LjksNi4zIDYuOSwxMi4xIDguNCwxMi4zIDguNCw2LjEgCQkiLz4KCQk8cG9seWdvbiBjbGFzcz0ic3QzIiBwb2ludHM9IjUsNi42IDUsMTEuNyA2LjMsMTEuOSA2LjMsNi40IAkJIi8+Cgk8L2c+CjwvZz4KPC9zdmc+Cg==" width="24" height="24"/>
+              Container Apps Environment: cae-blog-prod-eus2
+            </div>
+            
+            <div style="font-size: 11px; color: #475569; display: flex; gap: 6px; flex-wrap: wrap;">
+              <span class="pill">Workload: Consumption</span>
+              <span class="pill">Scale-to-Zero (0-10)</span>
+              <span class="pill">180k vCPU-s Free/mês</span>
+            </div>
+
+            <!-- Ingress & Container App -->
+            <div class="container-app-box">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                <span style="font-weight: 700; color: #0078d4; font-size: 13.5px; display: flex; align-items: center; gap: 8px;">
+                  <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/Pgo8IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMC8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9UUi8yMDAxL1JFQy1TVkctMjAwMTA5MDQvRFREL3N2ZzEwLmR0ZCI+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgaWQ9ImJvZHlfMSIgd2lkdGg9IjE4IiBoZWlnaHQ9IjE4Ij4KCjxkZWZzPgogICAgPGxpbmVhckdyYWRpZW50IHRyYW5zZm9ybT0ibWF0cml4KDEgMCAwIDEgMCAwKSIgIGlkPSIxIiB4MT0iOC43OTgiIHkxPSI4LjcwMyIgeDI9IjE0LjY4MyIgeTI9IjguNzAzIj4KICAgICAgICA8c3RvcCBzdG9wLWNvbG9yPSIjNzczQURDIiBvZmZzZXQ9IjAlIi8+CiAgICAgICAgPHN0b3Agc3RvcC1jb2xvcj0iIzU1MkY5OSIgb2Zmc2V0PSIxMDAlIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IHRyYW5zZm9ybT0ibWF0cml4KDEgMCAwIDEgMCAwKSIgIGlkPSIyMjkiIHgxPSI1Ljc2NCIgeTE9IjMuNzc3IiB4Mj0iNS43NjQiIHkyPSIxMy43OCI+CiAgICAgICAgPHN0b3Agc3RvcC1jb2xvcj0iI0E2N0FGNCIgb2Zmc2V0PSIwJSIvPgogICAgICAgIDxzdG9wIHN0b3AtY29sb3I9IiM3NzNBREMiIG9mZnNldD0iMTAwJSIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KPC9kZWZzPgoKPGcgdHJhbnNmb3JtPSJtYXRyaXgoMSAwIDAgMSAwIDApIj4KCTxnPgoJCTxnPgoJCQk8Zz4KCQkJCTxnPgogICAgICAgICAgICAgICAgICAgIDxwYXRoIGQ9Ik0xNi45MzIgMTEuNTc4QyAxNS43MjYzNDYgMTQuOTMxNjcxIDEyLjU0NTgwNSAxNy4xNjgwNTMgOC45ODE5OTkgMTcuMTY4QyA4LjE5MzQ1NiAxNy4xNzEyOTUgNy40MDg2MTQ2IDE3LjA2MDEzOSA2LjY1MTk5OTUgMTYuODM4QyA2Ljc2NzAzIDE2LjU3NjE5NyA2LjgyODI0MyAxNi4yOTM5MzYgNi44MzE5OTkzIDE2LjAwOEMgNi44NDE5OTk1IDE2LjAwOCA2Ljg2MTk5OTUgMTYuMDE4IDYuODcxOTk5MyAxNi4wMThDIDcuNTU3MjM3NiAxNi4yMTg5ODUgOC4yNjc4OTcgMTYuMzIwMDI2IDguOTgxOTk5IDE2LjMxNzk5OUMgMTEuODk0MDczNSAxNi4zMTIxOTcgMTQuNTUwMDIgMTQuNjUyNzE0IDE1LjgzMTk5OSAxMi4wMzc5OThMMTUuODMxOTk5IDEyLjAzNzk5OEwxNS44NDE5OTkgMTIuMDI3OTk4TDE2LjkzMiAxMS41Nzh6IiBzdHJva2U9Im5vbmUiIGZpbGw9IiMzMkJFREQiIGZpbGwtcnVsZT0ibm9uemVybyIgLz4KICAgICAgICAgICAgICAgICAgICA8cGF0aCBkPSJNMy41ODIgMTQuMDY4QyAzLjMzMTQzMzUgMTQuMjA3MjYyIDMuMTEzMjkwOCAxNC4zOTgxMzYgMi45NDIgMTQuNjI4QyAyLjI0ODY0MzQgMTMuOTE3MTc4IDEuNjgzNjI3MSAxMy4wOTE2NDQgMS4yNzIgMTIuMTg4TDEuMjcyIDEyLjE4OEwyLjMxMTk5OTggMTIuNDE3OTk5TDIuMzExOTk5OCAxMi42Nzc5OTk1QyAyLjMwOTk5NjYgMTIuOTYwODcxIDIuNTA1ODM5OCAxMy4yMDY3MTcgMi43ODE5OTk4IDEzLjI2OEwyLjc4MTk5OTggMTMuMjY4TDIuOTIyIDEzLjI5Nzk5OUMgMy4xMDkzMzExIDEzLjU1NzExNiAzLjMxNjYyOTQgMTMuODAxMTkyIDMuNTQxOTk5OCAxNC4wMjhMMy41NDE5OTk4IDE0LjAyOEwzLjU4MiAxNC4wNjh6IiBzdHJva2U9Im5vbmUiIGZpbGw9IiMzMkJFREQiIGZpbGwtcnVsZT0ibm9uemVybyIgLz4KICAgICAgICAgICAgICAgICAgICA8cGF0aCBkPSJNMTIuMzUyIDAuOTU4QyAxMi4yMTE3OTggMS4yMDg1ODkzIDEyLjEyMDE5MiAxLjQ4MzQwNyAxMi4wODIgMS43NjhDIDEyLjA2MTk5OSAxLjc1OCAxMi4wMzIgMS43NDggMTIuMDEyIDEuNzM4QyAxMS4wNTY5NzEgMS4zMTkwNDMyIDEwLjAyNDg3OCAxLjEwNDQ0OTMgOC45ODIgMS4xMDhDIDYuNjk1NTE1NiAxLjExMTgyMjEgNC41MzA4MzU2IDIuMTM5MTI3NyAzLjA4MjAwMDMgMy45MDhMMy4wODIwMDAzIDMuOTA4TDIuNzkyMDAwMyAzLjk2OEMgMi41MTU1MjE1IDQuMDI0NDEwNyAyLjMxNTcxIDQuMjY1ODQ5IDIuMzEyMDAwMyA0LjU0OEwyLjMxMjAwMDMgNC41NDhMMi4zMTIwMDAzIDUuMDA4TDEuMjkyMDAwMyA1LjE5OEMgMi42NzA0Nzc5IDIuMTkyMDY1NyA1LjY3NTA2MTcgMC4yNjU4NDkxIDguOTgyIDAuMjY4QyAxMC4xNDAzMzcgMC4yNjg2OTg3IDExLjI4NjU5OCAwLjUwMzM5MzIgMTIuMzUyIDAuOTU4eiIgc3Ryb2tlPSJub25lIiBmaWxsPSIjMzJCRUREIiBmaWxsLXJ1bGU9Im5vbnplcm8iIC8+CiAgICAgICAgICAgICAgICAgICAgPHBhdGggZD0iTTE2Ljg3MiA1LjdMMTUuNzgyIDUuMzE5OTk5N0MgMTUuNTgyNzQ2IDQuOTA5NDg1IDE1LjM0MTQ1MyA0LjUyMDczNSAxNS4wNjE5OTkgNC4xNkMgMTUuMDQxOTk5IDQuMTI5OTk5NiAxNS4wMjE5OTkgNC4xMDk5OTk3IDE1LjAxMTk5OSA0LjA4OTk5OTdDIDE1LjI4MDM0OSAzLjk5MTAyMyAxNS41MjU0NCAzLjgzNzg0MSAxNS43MzE5OTkgMy42Mzk5OTk2QyAxNi4yMTM5MTMgNC4yNjUxMTUzIDE2LjU5ODI4IDQuOTU5NjcyIDE2Ljg3MiA1Ljd6IiBzdHJva2U9Im5vbmUiIGZpbGw9IiMzMkJFREQiIGZpbGwtcnVsZT0ibm9uemVybyIgLz4KICAgICAgICAgICAgICAgICAgICA8cGF0aCBkPSJNMTAuMDcyIDExLjkwOEwxMi42MTE5OTk1IDEyLjQ2OEw4LjY3MiAxNC4xQyA4LjY1MTk5OSAxNC4xIDguNjQyIDE0LjExMDAwMSA4LjYyMiAxNC4xMTAwMDFDIDguNTQwMDQ1IDE0LjEwNzg5OCA4LjQ3NDEwMyAxNC4wNDE5NTYgOC40NzIgMTMuOTYwMDAxTDguNDcyIDEzLjk2MDAwMUw4LjQ3MiAzLjQ0OEMgOC40NzQxMDMgMy4zNjYwNDQgOC41NDAwNDQgMy4zMDAxMDI1IDguNjIyIDMuMjk3OTk5OUMgOC42MzkyODEgMy4yOTY0NDM1IDguNjU2NjQ1IDMuMjk5OTE2MyA4LjY3MiAzLjMwNzk5OThMOC42NzIgMy4zMDc5OTk4TDEzLjEzMiA0Ljg2OEwxMC4wODIgNS40MzhDIDkuODI4NjIzIDUuNDk1NDI5NSA5LjY0NzA2OCA1LjcxODI0NjUgOS42NDIgNS45NzhMOS42NDIgNS45NzhMOS42NDIgMTEuMzc4QyA5LjY0MDIwMSAxMS42MzQ3NDYgOS44MjAzOTUgMTEuODU2ODQ3IDEwLjA3MiAxMS45MDh6IiBzdHJva2U9Im5vbmUiIGZpbGw9IiNGRkZGRkYiIGZpbGwtcnVsZT0ibm9uemVybyIgLz4KCQkJCQk8Zz4KCQkJCQkJPGc+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBkPSJNMS4xIDUuNjY4TDIuMzEgNS40MzhMMi4zMSAxMS45ODgwMDFMMS4wNzk5OTk5IDExLjcxOEwwLjA4OTk5OTkxNCAxMS40OThDIDAuMDMzNDIyNjggMTEuNDg3Mzg4IC0wLjAwNTY1NDAxNDYgMTEuNDM1Mjg2IC04Ljk0MDY5N0UtMDggMTEuMzc4TC04Ljk0MDY5N0UtMDggMTEuMzc4TC04Ljk0MDY5N0UtMDggNS45NzhDIC0wLjAwMTc3NjA5OTIgNS45MjE4NjgzIDAuMDM1NjE1OTY2IDUuODcyMDEyNiAwLjA4OTk5OTkxNCA1Ljg1ODAwMDNMMC4wODk5OTk5MTQgNS44NTgwMDAzTDEuMSA1LjY2OHoiIHN0cm9rZT0ibm9uZSIgZmlsbD0iI0E2N0FGNCIgZmlsbC1ydWxlPSJub256ZXJvIiAvPgoJCQkJCQk8L2c+CgkJCQkJCTxnPgoJCQkJCQkJPGc+CgkJCQkJCQkJPGc+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxwYXRoIGQ9Ik0xMC4wNzIgMTEuOTA4TDEyLjYxMTk5OTUgMTIuNDY4TDguNjcyIDE0LjFDIDguNjUxOTk5IDE0LjEgOC42NDIgMTQuMTEwMDAxIDguNjIyIDE0LjExMDAwMUMgOC41NDAwNDUgMTQuMTA3ODk4IDguNDc0MTAzIDE0LjA0MTk1NiA4LjQ3MiAxMy45NjAwMDFMOC40NzIgMTMuOTYwMDAxTDguNDcyIDMuNDQ4QyA4LjQ3NDEwMyAzLjM2NjA0NCA4LjU0MDA0NCAzLjMwMDEwMjUgOC42MjIgMy4yOTc5OTk5QyA4LjYzOTI4MSAzLjI5NjQ0MzUgOC42NTY2NDUgMy4yOTk5MTYzIDguNjcyIDMuMzA3OTk5OEw4LjY3MiAzLjMwNzk5OThMMTMuMTMyIDQuODY4TDEwLjA4MiA1LjQzOEMgOS44Mjg2MjMgNS40OTU0Mjk1IDkuNjQ3MDY4IDUuNzE4MjQ2NSA5LjY0MiA1Ljk3OEw5LjY0MiA1Ljk3OEw5LjY0MiAxMS4zNzhDIDkuNjQwMjAxIDExLjYzNDc0NiA5LjgyMDM5NSAxMS44NTY4NDcgMTAuMDcyIDExLjkwOHoiIHN0cm9rZT0ibm9uZSIgZmlsbD0idXJsKCMxKSIgLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggZD0iTTguNTg2IDMuM0wyLjg3OCA0LjM3OEMgMi43OTU2NDM4IDQuMzk1NTk5NCAyLjczNzA5MiA0LjQ2ODc4OSAyLjczOCA0LjU1M0wyLjczOCA0LjU1M0wyLjczOCAxMi42OEMgMi43MzcyNjA4IDEyLjc2MjkzNSAyLjc5NDIwNzMgMTIuODM1MjYgMi44NzUgMTIuODU0TDIuODc1IDEyLjg1NEw4LjU4MSAxNC4xQyA4LjYzMjg3MiAxNC4xMTAyMTUgOC42ODY1ODcgMTQuMDk2NTcxIDguNzI3Mjk3IDE0LjA2Mjg0QyA4Ljc2ODAwNSAxNC4wMjkxMSA4Ljc5MTM5NiAxMy45Nzg4NjcgOC43OTEgMTMuOTI2MDAxTDguNzkxIDEzLjkyNjAwMUw4Ljc5MSAzLjQ3OEMgOC43OTE4MDIgMy40MzE1ODUgOC43NzQxMyAzLjM4Njc1MyA4Ljc0MTg3MyAzLjM1MzM3MDJDIDguNzA5NjE1IDMuMzE5OTg3MyA4LjY2NTQxNSAzLjMwMDc4ODkgOC42MTkgMy4zTDguNjE5IDMuM0w4LjU4NiAzLjN6IiBzdHJva2U9Im5vbmUiIGZpbGw9InVybCgjMjI5KSIgLz4KCQkJCQkJCQk8L2c+CgkJCQkJCQk8L2c+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBkPSJNNS45NDggNC45MjFMNS45NDggMTIuNDgzTDcuOTM0IDEyLjgxNEw3LjkzNCA0LjU2NEw1Ljk0OCA0LjkyMUw1Ljk0OCA0LjkyMSIgc3Ryb2tlPSJub25lIiBmaWxsPSIjQjc5NkY5IiBmaWxsLXJ1bGU9Im5vbnplcm8iIGZpbGwtb3BhY2l0eT0iMC40OTgwMzkyMiIgLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxwYXRoIGQ9Ik0zLjUwOSA1LjMyOUwzLjUwOSAxMS45NTRMNS4yMzggMTIuMzE3TDUuMjM4IDUuMDMxTDMuNTA5IDUuMzI5TDMuNTA5IDUuMzI5IiBzdHJva2U9Im5vbmUiIGZpbGw9IiNCNzk2RjkiIGZpbGwtcnVsZT0ibm9uemVybyIgZmlsbC1vcGFjaXR5PSIwLjQ5ODAzOTIyIiAvPgoJCQkJCQk8L2c+CgkJCQkJPC9nPgoJCQkJPC9nPgogICAgICAgICAgICAgICAgPHBhdGggZD0iTTE2IDIuMDQ4QyAxNS45OTcyMzkgMy4wMTU5NTI2IDE1LjIxMTI5NCAzLjc5ODkxMyAxNC4yNDMzMzkgMy43OTc5OTIyQyAxMy4yNzUzODIgMy43OTcwNzE3IDEyLjQ5MDkyOSAzLjAxMjYxNzYgMTIuNDkwMDA4IDIuMDQ0NjYxOEMgMTIuNDg5MDg4IDEuMDc2NzA1NyAxMy4yNzIwNDggMC4yOTA3NjE5NSAxNC4yNCAwLjI4ODAwMDFDIDE0LjcwNzEwNyAwLjI4NjkzNDg1IDE1LjE1NTM4OSAwLjQ3MjAyMDg2IDE1LjQ4NTY4MyAwLjgwMjMxNTk1QyAxNS44MTU5NzkgMS4xMzI2MTEgMTYuMDAxMDY0IDEuNTgwODkzNSAxNiAyLjA0OHoiIHN0cm9rZT0ibm9uZSIgZmlsbD0iIzMyQkVERCIgZmlsbC1ydWxlPSJub256ZXJvIiAvPgogICAgICAgICAgICAgICAgPHBhdGggZD0iTTYuNDA5IDE1Ljk3M0MgNi40MDkwMDA0IDE2LjQ1ODczNSA2LjIzNzI2NzUgMTYuODczMzM1IDUuODkzODAwNyAxNy4yMTY4QyA1LjU1MDMzNSAxNy41NjAyNjggNS4xMzU3MzQ2IDE3LjczMiA0LjY1IDE3LjczMkMgNC4xNjQyNjU2IDE3LjczMiAzLjc0OTY2NTUgMTcuNTYwMjY4IDMuNDA2MTk5NSAxNy4yMTY4QyAzLjA2MjczMzQgMTYuODczMzM1IDIuODkxMDAwMyAxNi40NTg3MzUgMi44OTEwMDAzIDE1Ljk3M0MgMi44OTEwMDAzIDE1LjQ4NzI2NiAzLjA2MjczMzQgMTUuMDcyNjY1IDMuNDA2MTk5NSAxNC43MjkxOThDIDMuNzQ5NjY1NSAxNC4zODU3MzMgNC4xNjQyNjU2IDE0LjIxNCA0LjY1IDE0LjIxNEMgNS4xMzU3MzQ2IDE0LjIxNCA1LjU1MDMzNSAxNC4zODU3MzMgNS44OTM4MDA3IDE0LjcyOTE5OEMgNi4yMzcyNjc1IDE1LjA3MjY2NSA2LjQwOTAwMDQgMTUuNDg3MjY2IDYuNDA5IDE1Ljk3M0MgNi40MDkwMDA0IDE1Ljk5MzQ2OCA2LjQwODY0MzIgMTYuMDEzOTMxIDYuNDA3OTI4NSAxNi4wMzQzODgiIHN0cm9rZT0ibm9uZSIgZmlsbD0iIzMyQkVERCIgZmlsbC1ydWxlPSJub256ZXJvIiAvPgoJCQk8L2c+CiAgICAgICAgICAgIDxwYXRoIGQ9Ik0xOCA2LjY4OUwxOCAxMC41MzNDIDE3Ljk5ODY3MiAxMC42MTk5NjQgMTcuOTQ2Njg0IDEwLjY5ODE0MiAxNy44NjcgMTAuNzMzTDE3Ljg2NyAxMC43MzNMMTcuMTAxIDExLjA0OUwxNC4wMzEgMTIuMzE2OTk5TDE0LjAyIDEyLjMxNjk5OUMgMTQuMDA3NDA2IDEyLjMxODkyIDEzLjk5NDU5NSAxMi4zMTg5MiAxMy45ODIgMTIuMzE2OTk5QyAxMy45NTU0NzkgMTIuMzE2OTk5IDEzLjkzMDA0MyAxMi4zMDY0NjMgMTMuOTExMjg5IDEyLjI4NzcxQyAxMy44OTI1MzYgMTIuMjY4OTU2IDEzLjg4MiAxMi4yNDM1MjEgMTMuODgyIDEyLjIxNjk5OUwxMy44ODIgMTIuMjE2OTk5TDEzLjg4MiA1LjIzNEMgMTMuODgyMjk1IDUuMTk2OTI0NyAxMy45MDMwNzkgNS4xNjMwNTUgMTMuOTM2IDUuMTQ2MDAwNEwxMy45MzYgNS4xNDYwMDA0TDEzLjk1NSA1LjE0NjAwMDRDIDEzLjk2MTE3OCA1LjE0NDAxMiAxMy45Njc4MjMgNS4xNDQwMTIgMTMuOTc0IDUuMTQ2MDAwNEMgMTMuOTg1OTAyIDUuMTQ0OTAyIDEzLjk5NzgzNyA1LjE0NzcxMDMgMTQuMDA4IDUuMTU0MDAwM0wxNC4wMDggNS4xNTQwMDAzTDE0LjAxOSA1LjE1NDAwMDNMMTQuMDMxIDUuMTU0MDAwM0wxNy4wNSA2LjJMMTcuODQ5OTk4IDYuNDgyQyAxNy45NDA0NDkgNi41MDk5OTEgMTguMDAxNTY2IDYuNTk0MzMgMTggNi42ODl6IiBzdHJva2U9Im5vbmUiIGZpbGw9IiM3NzNBREMiIGZpbGwtcnVsZT0ibm9uemVybyIgLz4KICAgICAgICAgICAgPHBhdGggZD0iTTEzLjk1OSA1LjE0TDEwLjE1ODk5OSA1Ljg1NUMgMTAuMTA0MTAzIDUuODY2ODk0MiAxMC4wNjUyMDEgNS45MTU4MzYgMTAuMDY1OTk5IDUuOTcyTDEwLjA2NTk5OSA1Ljk3MkwxMC4wNjU5OTkgMTEuMzgxMDAwNUMgMTAuMDY1NDcxIDExLjQzNjE5MiAxMC4xMDMyNyAxMS40ODQzNzUgMTAuMTU2OTk5IDExLjQ5NzAwMUwxMC4xNTY5OTkgMTEuNDk3MDAxTDEzLjk1Njk5OSAxMi4zMjgwMDFDIDEzLjk4NzEyNCAxMi4zMzQ0ODggMTQuMDE4NTkzIDEyLjMyODYxMyAxNC4wNDQzNDkgMTIuMzExNjkzQyAxNC4wNzAxMDQgMTIuMjk0Nzc0IDE0LjA4Nzk5MSAxMi4yNjgyMjYgMTQuMDkzOTk5IDEyLjIzODAwMUMgMTQuMDk1MDM2NSAxMi4yMjkzNjQgMTQuMDk1MDM2NSAxMi4yMjA2MzYgMTQuMDkzOTk5IDEyLjIxMjAwMUwxNC4wOTM5OTkgMTIuMjEyMDAxTDE0LjA5Mzk5OSA1LjI1NkMgMTQuMDk0NTU3IDUuMTkxNzY3IDE0LjA0MzIyNSA1LjEzOTA5NiAxMy45Nzg5OTkgNS4xMzhDIDEzLjk3MjI3NyA1LjEzNzg0NCAxMy45NjU1NiA1LjEzODUxNTUgMTMuOTU5IDUuMTR6IiBzdHJva2U9Im5vbmUiIGZpbGw9IiNBNjdBRjQiIGZpbGwtcnVsZT0ibm9uemVybyIgLz4KCQk8L2c+Cgk8L2c+CjwvZz4KPC9zdmc+" width="22" height="22"/>
+                  Container App: blog
+                </span>
+                <span style="background: #dcfce7; color: #15803d; font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 999px;">EM PRODUÇÃO</span>
+              </div>
+
+              <div style="font-size: 11.5px; line-height: 1.7; color: #334155;">
+                <div>• <strong>Runtime:</strong> Node.js 22 LTS Alpine + Vite React</div>
+                <div>• <strong>Segurança:</strong> Execução sob usuário <span class="pill">node:node</span> (Non-Root)</div>
+                <div>• <strong>Ingress:</strong> External HTTPS (Porta 3000 interna / 443 externa)</div>
+                <div>• <strong>Volume Mapeado:</strong> <span class="pill" style="background: #dcfce7; border-color: #86efac; color: #166534;">/app/data</span> (Persistent Mount)</div>
+              </div>
+            </div>
+
+            <div style="font-size: 11px; color: #475569; background: #f8fafc; padding: 8px 10px; border-radius: 6px; border-left: 3px solid #0078d4;">
+              <strong>Definição no Ambiente:</strong> Volume <span class="pill">blog-storage</span> registrado com chave gerenciada e criptografada no CAE.
+            </div>
+
+          </div>
+
+          <!-- Storage Account Column -->
+          <div class="storage-box">
+            <div class="storage-header">
+              <img src="data:image/svg+xml;base64,PHN2ZyBpZD0iZjJmMDQzNDktOGFlZS00NDEzLTg0YzktYTkwNTM2MTFiMzE5IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciICB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCI+DQogIDxkZWZzPg0KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYWQ0YzRmOTYtMDlhYS00ZjkxLWJhMTAtNWNiOGFkNTMwZjc0IiB4MT0iOSIgeTE9IjE1LjgzIiB4Mj0iOSIgeTI9IjUuNzkiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj4NCiAgICAgIDxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2IzYjNiMyIvPg0KICAgICAgPHN0b3Agb2Zmc2V0PSIwLjI2IiBzdG9wLWNvbG9yPSIjYzFjMWMxIi8+DQogICAgICA8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNlNmU2ZTYiLz4NCiAgICA8L2xpbmVhckdyYWRpZW50Pg0KICA8L2RlZnM+DQogIDx0aXRsZT5JY29uLXN0b3JhZ2UtODY8L3RpdGxlPg0KICA8cGF0aCBkPSJNLjUsNS43OWgxN2EwLDAsMCwwLDEsMCwwdjkuNDhhLjU3LjU3LDAsMCwxLS41Ny41N0gxLjA3YS41Ny41NywwLDAsMS0uNTctLjU3VjUuNzlBMCwwLDAsMCwxLC41LDUuNzlaIiBmaWxsPSJ1cmwoI2FkNGM0Zjk2LTA5YWEtNGY5MS1iYTEwLTVjYjhhZDUzMGY3NCkiLz4NCiAgPHBhdGggZD0iTTEuMDcsMi4xN0gxNi45M2EuNTcuNTcsMCwwLDEsLjU3LjU3VjUuNzlhMCwwLDAsMCwxLDAsMEguNWEwLDAsMCwwLDEsMCwwVjIuNzNBLjU3LjU3LDAsMCwxLDEuMDcsMi4xN1oiIGZpbGw9IiMzN2MyYjEiLz4NCiAgPHBhdGggZD0iTTIuODEsNi44OUgxNS4xOGEuMjcuMjcsMCwwLDEsLjI2LjI3djEuNGEuMjcuMjcsMCwwLDEtLjI2LjI3SDIuODFhLjI3LjI3LDAsMCwxLS4yNi0uMjdWNy4xNkEuMjcuMjcsMCwwLDEsMi44MSw2Ljg5WiIgZmlsbD0iI2ZmZiIvPg0KICA8cGF0aCBkPSJNMi44Miw5LjY4SDE1LjE5YS4yNy4yNywwLDAsMSwuMjYuMjd2MS40MWEuMjcuMjcsMCwwLDEtLjI2LjI3SDIuODJhLjI3LjI3LDAsMCwxLS4yNi0uMjdWMTBBLjI3LjI3LDAsMCwxLDIuODIsOS42OFoiIGZpbGw9IiMzN2MyYjEiLz4NCiAgPHBhdGggZD0iTTIuODIsMTIuNUgxNS4xOWEuMjcuMjcsMCwwLDEsLjI2LjI3djEuNDFhLjI3LjI3LDAsMCwxLS4yNi4yN0gyLjgyYS4yNy4yNywwLDAsMS0uMjYtLjI3VjEyLjc3QS4yNy4yNywwLDAsMSwyLjgyLDEyLjVaIiBmaWxsPSIjMjU4Mjc3Ii8+DQo8L3N2Zz4NCg==" width="24" height="24"/>
+              Storage Account: sttechblog
+            </div>
+
+            <div style="font-size: 11px; color: #475569; display: flex; gap: 6px;">
+              <span class="pill">Tier: Standard LRS</span>
+              <span class="pill">Shared Key: Enabled</span>
+            </div>
+
+            <div style="background: #ecfdf5; border: 1.5px solid #a7f3d0; border-radius: 8px; padding: 12px; margin-top: 4px;">
+              <div style="font-weight: 700; color: #065f46; font-size: 12.5px; margin-bottom: 6px;">
+                📁 Azure File Share: blogdata
+              </div>
+              <div style="font-size: 11.5px; color: #047857; line-height: 1.6;">
+                <div>• <strong>Protocolo:</strong> SMB 3.0</div>
+                <div>• <strong>Access Tier:</strong> Transaction Optimized</div>
+                <div>• <strong>Arquivo Persistido:</strong> <span class="pill">blog-db.json</span></div>
+                <div>• <strong>Azure Backup:</strong> Desativado (Zero Extra Cost)</div>
+              </div>
+            </div>
+
+            <div style="font-size: 11px; color: #065f46; background: #f0fdf4; padding: 8px 10px; border-radius: 6px; border-left: 3px solid #10b981; margin-top: auto;">
+              <strong>Garantia de Estado:</strong> O container é efêmero, mas o disco é persistente. Qualquer deploy ou restart preserva 100% dos dados.
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Footer Specs -->
+  <div class="footer-bar">
+    <div class="spec-item">
+      <strong>1. FinOps &amp; Custo Zero</strong>
+      R$ 0,00 mensal usando cotas gratuitas permanentes do ACA + Storage LRS.
+    </div>
+    <div class="spec-item">
+      <strong>2. Persistência de Estado</strong>
+      Desacoplamento de réplicas efêmeras via Azure Files SMB Mount.
+    </div>
+    <div class="spec-item">
+      <strong>3. Segurança e Identidade</strong>
+      Service Principal com escopo PoLP no Resource Group + Container Non-Root.
+    </div>
+    <div class="spec-item">
+      <strong>4. Exames Relacionados</strong>
+      AZ-104 (Admin/Storage), AZ-305 (Solutions Architect), AZ-400 (DevOps).
+    </div>
+  </div>
+
+</body>
+</html>
