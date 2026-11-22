@@ -1,6 +1,8 @@
 name: Build & Deploy Blog to Azure Container Apps (OIDC Zero-Trust)
 
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
