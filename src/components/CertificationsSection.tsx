@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Award, Check, Copy, ExternalLink, Search, ShieldCheck } from 'lucide-react';
+import { Award, Check, Copy, Search, ShieldCheck } from 'lucide-react';
 import { CertificationBadge } from './CertificationBadge';
 import { CERTIFICATIONS_LIST, CertificationItem } from '../utils/certificationsData';
 import { useI18n } from '../contexts/I18nContext';
@@ -27,11 +27,10 @@ export const CertificationsSection: React.FC<CertificationsSectionProps> = ({
   const categories = useMemo(() => {
     return [
       { id: 'all', label: language === 'en' ? `All (${CERTIFICATIONS_LIST.length})` : `Todas (${CERTIFICATIONS_LIST.length})` },
-      { id: 'role-based', label: language === 'en' ? 'Microsoft Role-Based' : 'Microsoft Especialista' },
+      { id: 'role-based', label: 'Role-Based (AZ / AI)' },
       { id: 'trainer-skills', label: 'MCT & Applied Skills' },
-      { id: 'finops-architecture', label: language === 'en' ? 'Architecture, FinOps & AWS' : 'Arquitetura, FinOps & AWS' },
-      { id: 'block64', label: 'Block 64 (Migration)' },
-      { id: 'fundamentals', label: language === 'en' ? 'Fundamentals' : 'Fundamentos' },
+      { id: 'finops', label: 'FinOps' },
+      { id: 'fundamentals', label: language === 'en' ? 'Fundamentals (AZ / MS / SC / AI)' : 'Fundamentos (AZ / MS / SC / AI)' },
     ];
   }, [language]);
 
@@ -67,8 +66,8 @@ export const CertificationsSection: React.FC<CertificationsSectionProps> = ({
 
   const defaultSubtitle =
     language === 'en'
-      ? `${CERTIFICATIONS_LIST.length} validated professional credentials spanning Microsoft Azure Architect Expert, MCT, FinOps, Security, and Cloud Architecture.`
-      : `${CERTIFICATIONS_LIST.length} credenciais profissionais validadas abrangendo Microsoft Azure Architect Expert, MCT, FinOps, Segurança e Arquitetura de Nuvem.`;
+      ? `${CERTIFICATIONS_LIST.length} validated credentials in Microsoft Azure Architecture, MCT, FinOps, and Cloud Security.`
+      : `${CERTIFICATIONS_LIST.length} credenciais oficiais validadas em Microsoft Azure, MCT, FinOps e Segurança.`;
 
   return (
     <section className={`py-16 ${className}`} id="certifications">
@@ -77,7 +76,7 @@ export const CertificationsSection: React.FC<CertificationsSectionProps> = ({
         <div className="text-center max-w-3xl mx-auto mb-12">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-[#0067b8] text-xs font-bold uppercase tracking-wider mb-3">
             <Award className="w-4 h-4" />
-            <span>{language === 'en' ? 'Validated Expertise' : 'Expertise Validada'}</span>
+            <span>{language === 'en' ? 'Validated Credentials' : 'Credenciais Validadas'}</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-bold text-[#1a1a1a] tracking-tight">
             {title || defaultTitle}
@@ -116,8 +115,8 @@ export const CertificationsSection: React.FC<CertificationsSectionProps> = ({
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={
                   language === 'en'
-                    ? 'Search by code, title, or credential ID...'
-                    : 'Pesquisar por código, título ou ID da credencial...'
+                    ? 'Search by code (e.g. AZ-305, SC-900, AI-102)...'
+                    : 'Pesquisar por código (ex: AZ-305, SC-900, AI-102)...'
                 }
                 className="w-full bg-white border border-gray-200 rounded-xl pl-10 pr-4 py-2.5 text-sm text-[#1a1a1a] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#0067b8]/20 focus:border-[#0067b8] transition-all"
               />
@@ -137,20 +136,24 @@ export const CertificationsSection: React.FC<CertificationsSectionProps> = ({
                 className="bg-white rounded-2xl border border-gray-200 p-5 shadow-xs hover:shadow-md transition-all hover:border-blue-200 flex flex-col justify-between group"
               >
                 <div className="flex items-start gap-4">
-                  {/* Badge Vector */}
+                  {/* Badge Vector or Official Image */}
                   <div className="shrink-0">
                     <CertificationBadge
                       code={cert.code}
                       badgeLevel={cert.badgeLevel}
                       issuer={cert.issuer}
-                      badgeSvg={cert.badgeSvg}
+                      badgeImage={cert.badgeImage}
                       className="w-20 h-20"
                     />
                   </div>
 
                   {/* Details */}
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-1.5 flex-wrap mb-1">
+                    <div className="flex items-center gap-1.5 flex-wrap mb-1.5">
+                      {/* Prominent Certification Code Pill (AZ-305, AZ-104, SC-900, AI-102, etc.) */}
+                      <span className="px-2 py-0.5 rounded-md bg-[#0067b8] text-white font-black text-xs tracking-wider shadow-2xs">
+                        {cert.code}
+                      </span>
                       <span className="inline-flex items-center gap-1 text-[11px] font-bold px-2 py-0.5 rounded-md bg-gray-100 text-[#404040]">
                         <ShieldCheck className="w-3 h-3 text-[#0067b8]" />
                         {cert.issuer}
@@ -167,12 +170,12 @@ export const CertificationsSection: React.FC<CertificationsSectionProps> = ({
                   </div>
                 </div>
 
-                {/* Bottom Actions: Credential ID & Verify */}
+                {/* Bottom Actions: Credential ID */}
                 <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs gap-2">
                   {cert.credentialId ? (
                     <div className="flex items-center gap-1.5 min-w-0">
                       <span className="text-gray-400 font-medium shrink-0">ID:</span>
-                      <code className="font-mono text-[11px] font-semibold text-gray-700 bg-gray-50 px-1.5 py-0.5 rounded border border-gray-200 truncate max-w-[120px] sm:max-w-[140px]">
+                      <code className="font-mono text-[11px] font-semibold text-gray-700 bg-gray-50 px-1.5 py-0.5 rounded border border-gray-200 truncate max-w-[150px] sm:max-w-[170px]">
                         {cert.credentialId}
                       </code>
                       <button
@@ -190,21 +193,13 @@ export const CertificationsSection: React.FC<CertificationsSectionProps> = ({
                     </div>
                   ) : (
                     <span className="text-[11px] text-gray-400 font-medium">
-                      {language === 'en' ? 'Official Trainer / Cert' : 'Credencial Oficial'}
+                      {language === 'en' ? 'Official Microsoft Credential' : 'Credencial Oficial Microsoft'}
                     </span>
                   )}
 
-                  {cert.verifyUrl && (
-                    <a
-                      href={cert.verifyUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-[11px] font-bold text-[#0067b8] hover:text-[#004e8c] hover:underline shrink-0"
-                    >
-                      <span>{language === 'en' ? 'Verify' : 'Validar'}</span>
-                      <ExternalLink className="w-3 h-3" />
-                    </a>
-                  )}
+                  <span className="text-[11px] font-bold text-[#0067b8]">
+                    {cert.code}
+                  </span>
                 </div>
               </div>
             );

@@ -5,11 +5,11 @@ export interface CertificationItem {
     pt: string;
     en: string;
   };
-  category: 'role-based' | 'trainer-skills' | 'finops-architecture' | 'block64' | 'fundamentals';
-  badgeLevel: 'expert' | 'associate' | 'trainer' | 'applied-skills' | 'architecture' | 'practitioner' | 'specialist' | 'fundamentals';
-  issuer: 'Microsoft' | 'FinOps Foundation' | 'AWS' | 'ITXPRO' | 'Block 64';
+  category: 'role-based' | 'trainer-skills' | 'finops' | 'fundamentals';
+  badgeLevel: 'expert' | 'associate' | 'trainer' | 'applied-skills' | 'practitioner' | 'fundamentals';
+  issuer: 'Microsoft' | 'FinOps Foundation';
   credentialId?: string;
-  badgeSvg?: string;
+  badgeImage?: string;
   featured?: boolean;
 }
 
@@ -26,7 +26,7 @@ export const CERTIFICATIONS_LIST: CertificationItem[] = [
     badgeLevel: 'expert',
     issuer: 'Microsoft',
     credentialId: 'E023A2555C547121',
-    badgeSvg: '/badges/microsoft-certified-expert-badge.svg',
+    badgeImage: '/badges/microsoft-certified-expert-badge.svg',
     featured: true,
   },
   {
@@ -40,7 +40,7 @@ export const CERTIFICATIONS_LIST: CertificationItem[] = [
     badgeLevel: 'associate',
     issuer: 'Microsoft',
     credentialId: 'D7ADCF4B9E39EB25',
-    badgeSvg: '/badges/microsoft-certified-associate-badge.svg',
+    badgeImage: '/badges/microsoft-certified-associate-badge.svg',
     featured: true,
   },
   {
@@ -54,7 +54,7 @@ export const CERTIFICATIONS_LIST: CertificationItem[] = [
     badgeLevel: 'associate',
     issuer: 'Microsoft',
     credentialId: '922278D1BD0CB2CF',
-    badgeSvg: '/badges/microsoft-certified-associate-badge.svg',
+    badgeImage: '/badges/microsoft-certified-associate-badge.svg',
     featured: true,
   },
   {
@@ -68,7 +68,7 @@ export const CERTIFICATIONS_LIST: CertificationItem[] = [
     badgeLevel: 'associate',
     issuer: 'Microsoft',
     credentialId: 'B4A548D6EE358418',
-    badgeSvg: '/badges/microsoft-certified-associate-badge.svg',
+    badgeImage: '/badges/microsoft-certified-associate-badge.svg',
     featured: true,
   },
 
@@ -77,13 +77,13 @@ export const CERTIFICATIONS_LIST: CertificationItem[] = [
     id: 'mct',
     code: 'MCT',
     name: {
-      pt: 'Microsoft Certified Trainer (MCT) 2026 (e 2023–2024)',
-      en: 'Microsoft Certified Trainer (MCT) 2026 (and 2023–2024)',
+      pt: 'Microsoft Certified Trainer (MCT) 2021–2026',
+      en: 'Microsoft Certified Trainer (MCT) 2021–2026',
     },
     category: 'trainer-skills',
     badgeLevel: 'trainer',
     issuer: 'Microsoft',
-    badgeSvg: '/badges/microsoft-certified-trainer-badge.svg',
+    badgeImage: '/badges/microsoft-certified-trainer.png',
     featured: true,
   },
   {
@@ -123,19 +123,7 @@ export const CERTIFICATIONS_LIST: CertificationItem[] = [
     credentialId: '779EF79872A3F8D4',
   },
 
-  // 3. Arquitetura Corporativa, FinOps & AWS
-  {
-    id: 'togaf-ea',
-    code: 'TOGAF',
-    name: {
-      pt: 'Enterprise Architect – TOGAF (ITXPRO)',
-      en: 'Enterprise Architect – TOGAF (ITXPRO)',
-    },
-    category: 'finops-architecture',
-    badgeLevel: 'architecture',
-    issuer: 'ITXPRO',
-    featured: true,
-  },
+  // 3. FinOps
   {
     id: 'finops-focp',
     code: 'FinOps FOCP',
@@ -143,77 +131,15 @@ export const CERTIFICATIONS_LIST: CertificationItem[] = [
       pt: 'FinOps Certified Practitioner (FinOps Foundation)',
       en: 'FinOps Certified Practitioner (FinOps Foundation)',
     },
-    category: 'finops-architecture',
+    category: 'finops',
     badgeLevel: 'practitioner',
     issuer: 'FinOps Foundation',
     credentialId: 'tpeqopm3xhpy',
-    featured: true,
-  },
-  {
-    id: 'finops-intro',
-    code: 'FinOps Intro',
-    name: {
-      pt: 'Introduction to FinOps (FinOps Foundation)',
-      en: 'Introduction to FinOps (FinOps Foundation)',
-    },
-    category: 'finops-architecture',
-    badgeLevel: 'practitioner',
-    issuer: 'FinOps Foundation',
-    credentialId: 'buj7ww2bakq8',
-  },
-  {
-    id: 'aws-ccp',
-    code: 'AWS CCP',
-    name: {
-      pt: 'AWS Certified Cloud Practitioner (Amazon Web Services)',
-      en: 'AWS Certified Cloud Practitioner (Amazon Web Services)',
-    },
-    category: 'finops-architecture',
-    badgeLevel: 'fundamentals',
-    issuer: 'AWS',
+    badgeImage: '/badges/finops-certified-practitioner.png',
     featured: true,
   },
 
-  // 4. Cloud Assessments & Migração (Block 64)
-  {
-    id: 'block64-ts',
-    code: 'Block 64 TS',
-    name: {
-      pt: 'Block 64 Certified Technical Specialist',
-      en: 'Block 64 Certified Technical Specialist',
-    },
-    category: 'block64',
-    badgeLevel: 'specialist',
-    issuer: 'Block 64',
-    credentialId: '63f8c4edaad3be759190bc88',
-  },
-  {
-    id: 'block64-ta',
-    code: 'Block 64 TA',
-    name: {
-      pt: 'Block 64 Certified Technical Architect',
-      en: 'Block 64 Certified Technical Architect',
-    },
-    category: 'block64',
-    badgeLevel: 'architecture',
-    issuer: 'Block 64',
-    credentialId: '63f8c4d3c57cce0f68c0db1e',
-    featured: true,
-  },
-  {
-    id: 'block64-da',
-    code: 'Block 64 DA',
-    name: {
-      pt: 'Block 64 Certified Delivery Architect',
-      en: 'Block 64 Certified Delivery Architect',
-    },
-    category: 'block64',
-    badgeLevel: 'architecture',
-    issuer: 'Block 64',
-    credentialId: '63f8c49bc57cce0f68c0db16',
-  },
-
-  // 5. Fundamentos Microsoft (Base Oficial)
+  // 4. Fundamentos Microsoft (Base Oficial)
   {
     id: 'az-900',
     code: 'AZ-900',
@@ -225,7 +151,7 @@ export const CERTIFICATIONS_LIST: CertificationItem[] = [
     badgeLevel: 'fundamentals',
     issuer: 'Microsoft',
     credentialId: 'B312BE11A0BFE8B1',
-    badgeSvg: '/badges/microsoft-certified-fundamentals-badge.svg',
+    badgeImage: '/badges/microsoft-certified-fundamentals-badge.svg',
     featured: true,
   },
   {
@@ -239,7 +165,7 @@ export const CERTIFICATIONS_LIST: CertificationItem[] = [
     badgeLevel: 'fundamentals',
     issuer: 'Microsoft',
     credentialId: '3D126D7D123FFDE0',
-    badgeSvg: '/badges/microsoft-certified-fundamentals-badge.svg',
+    badgeImage: '/badges/microsoft-certified-fundamentals-badge.svg',
   },
   {
     id: 'sc-900',
@@ -252,7 +178,7 @@ export const CERTIFICATIONS_LIST: CertificationItem[] = [
     badgeLevel: 'fundamentals',
     issuer: 'Microsoft',
     credentialId: '6A4E981F8E071896',
-    badgeSvg: '/badges/microsoft-certified-fundamentals-badge.svg',
+    badgeImage: '/badges/microsoft-certified-fundamentals-badge.svg',
     featured: true,
   },
   {
@@ -265,6 +191,6 @@ export const CERTIFICATIONS_LIST: CertificationItem[] = [
     category: 'fundamentals',
     badgeLevel: 'fundamentals',
     issuer: 'Microsoft',
-    badgeSvg: '/badges/microsoft-certified-fundamentals-badge.svg',
+    badgeImage: '/badges/microsoft-certified-fundamentals-badge.svg',
   },
 ];
