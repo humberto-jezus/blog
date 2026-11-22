@@ -29,6 +29,36 @@
       "language": "pt",
       "createdAt": "2024-03-10T10:00:00.000Z",
       "updatedAt": "2024-03-10T10:00:00.000Z"
+    },
+    {
+      "id": "3",
+      "title": "Modernizing Infrastructure with Azure Bicep",
+      "excerpt": "Learn how to use Azure Bicep to define and deploy your cloud infrastructure as code with ease and precision.",
+      "content": "<p>Azure Bicep is a Domain Specific Language (DSL) for deploying Azure resources declaratively. It aims to simplify the authoring experience by providing a cleaner syntax, better modularity, and automatic dependency management.</p><h2>Why Adopt Bicep?</h2><ul><li><strong>Clean and concise syntax</strong> compared to JSON ARM templates.</li><li><strong>Native modularity</strong> to reuse enterprise security and networking patterns.</li><li><strong>Immediate validation</strong> with full support in VS Code and Azure DevOps / GitHub Actions pipelines.</li></ul>",
+      "category": "DevOps",
+      "imageUrl": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1000",
+      "date": "2024-03-15",
+      "readTime": "8 min read",
+      "author": "Humberto Jezus",
+      "authorUid": "admin-humberto",
+      "language": "en",
+      "createdAt": "2024-03-15T10:00:00.000Z",
+      "updatedAt": "2024-03-15T10:00:00.000Z"
+    },
+    {
+      "id": "4",
+      "title": "Azure AI Services: A Deep Dive",
+      "excerpt": "Explore the latest advancements in Azure AI Services and how they can transform your applications with intelligent features.",
+      "content": "<p>Microsoft Azure offers a comprehensive suite of AI services that allow developers to build intelligent applications with enterprise security, data governance, and high scalability.</p><h2>Key Enterprise Scenarios</h2><ul><li><strong>Vision and Document Intelligence</strong> for automating document and invoice workflows.</li><li><strong>Azure OpenAI and AI Foundry</strong> integrated with Private Endpoints and Entra ID.</li><li><strong>Observability and FinOps</strong> to manage token consumption and latency in production.</li></ul>",
+      "category": "AI & Machine Learning",
+      "imageUrl": "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=1000",
+      "date": "2024-03-10",
+      "readTime": "12 min read",
+      "author": "Humberto Jezus",
+      "authorUid": "admin-humberto",
+      "language": "en",
+      "createdAt": "2024-03-10T10:00:00.000Z",
+      "updatedAt": "2024-03-10T10:00:00.000Z"
     }
   ],
   "pages": {

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import PostCard from '../components/PostCard';
 import ArticleContent from '../components/ArticleContent';
 import PageSectionsRenderer from '../components/PageSectionsRenderer';
+import { CertificationsSection } from '../components/CertificationsSection';
 import { ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { BlogPost, PageContent } from '../types';
@@ -72,8 +73,8 @@ export default function Home() {
     if (!text.trim()) return null;
     const className =
       variant === 'primary'
-        ? 'bg-[#0067b8] text-white px-9 py-4 rounded-lg text-base md:text-lg font-bold hover:bg-[#005a9e] transition-colors shadow-lg'
-        : 'border-2 border-white/40 bg-white/10 backdrop-blur-sm text-white px-9 py-4 rounded-lg text-base md:text-lg font-bold hover:bg-white/20 transition-colors shadow-lg';
+        ? 'bg-[#0067b8] text-white px-9 py-4 rounded-lg text-base md:text-lg font-bold hover:bg-[#005a9e] transition-colors shadow-lg cursor-pointer'
+        : 'border-2 border-white/40 bg-white/10 backdrop-blur-sm text-white px-9 py-4 rounded-lg text-base md:text-lg font-bold hover:bg-white/20 transition-colors shadow-lg cursor-pointer';
 
     if (isExternalLink(link)) {
       return (
@@ -90,6 +91,9 @@ export default function Home() {
     );
   };
 
+  const heroTitle = language === 'en' ? t('home.welcome') : (pageContent?.title || t('home.welcome'));
+  const heroSubtitle = language === 'en' ? t('home.subtitle') : (pageContent?.content?.trim() ? null : t('home.subtitle'));
+
   return (
     <div className="bg-[#faf9f8] min-h-screen font-sans">
       {/* Hero Banner Section */}
@@ -97,32 +101,41 @@ export default function Home() {
         <NetworkBackground />
         <div className="relative z-10 max-w-4xl mx-auto">
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 drop-shadow-lg tracking-tight">
-            {pageContent?.title || t('home.welcome')}
+            {heroTitle}
           </h1>
-          {pageContent?.content?.trim() ? (
+
+          {language === 'en' || !pageContent?.content?.trim() ? (
+            <p className="text-white/95 text-lg md:text-2xl font-medium mb-10 max-w-2xl mx-auto drop-shadow-md leading-relaxed">
+              {t('home.subtitle')}
+            </p>
+          ) : (
             <div
               className="prose prose-invert max-w-2xl mx-auto mb-10 prose-p:text-white/95 prose-p:text-lg md:prose-p:text-2xl prose-p:font-medium drop-shadow-md"
               dangerouslySetInnerHTML={{ __html: pageContent.content }}
             />
-          ) : (
-            <p className="text-white/95 text-lg md:text-2xl font-medium mb-10 max-w-2xl mx-auto drop-shadow-md leading-relaxed">
-              {t('home.subtitle')}
-            </p>
           )}
+
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             {renderHeroButton(
-              pageContent?.homeConfig ? homeConfig.primaryButtonText : t('home.readArticles'),
+              language === 'en'
+                ? t('home.readArticles')
+                : (pageContent?.homeConfig ? homeConfig.primaryButtonText : t('home.readArticles')),
               homeConfig.primaryButtonLink,
               'primary'
             )}
             {renderHeroButton(
-              pageContent?.homeConfig ? homeConfig.secondaryButtonText : t('nav.about'),
+              language === 'en'
+                ? t('nav.about')
+                : (pageContent?.homeConfig ? homeConfig.secondaryButtonText : t('nav.about')),
               homeConfig.secondaryButtonLink,
               'secondary'
             )}
           </div>
         </div>
       </div>
+
+      {/* Official Certifications & Badges Section */}
+      <CertificationsSection className="bg-[#f3f5f8] border-b border-gray-200" />
 
       {/* Optional Editable Extra Content Block */}
       {homeConfig.extraContent?.trim() && (
@@ -140,17 +153,23 @@ export default function Home() {
             <div className="flex justify-between items-end mb-10">
               <div>
                 <h2 className="text-sm font-bold text-[#0067b8] uppercase tracking-wider mb-2">
-                  {pageContent?.homeConfig ? homeConfig.postsEyebrow : t('home.news')}
+                  {language === 'en'
+                    ? t('home.news')
+                    : (pageContent?.homeConfig ? homeConfig.postsEyebrow : t('home.news'))}
                 </h2>
                 <h3 className="text-3xl md:text-4xl font-bold text-[#1a1a1a]">
-                  {pageContent?.homeConfig ? homeConfig.postsTitle : t('home.latest')}
+                  {language === 'en'
+                    ? t('home.latest')
+                    : (pageContent?.homeConfig ? homeConfig.postsTitle : t('home.latest'))}
                 </h3>
               </div>
               <Link
                 to="/articles"
                 className="hidden sm:inline-flex items-center px-4 py-2.5 rounded-lg text-[#0067b8] hover:bg-blue-50 text-base font-bold transition-colors"
               >
-                {pageContent?.homeConfig ? homeConfig.postsViewAllText : t('home.viewAll')}{' '}
+                {language === 'en'
+                  ? t('home.viewAll')
+                  : (pageContent?.homeConfig ? homeConfig.postsViewAllText : t('home.viewAll'))}{' '}
                 <ChevronRight className="h-5 w-5 ml-1" />
               </Link>
             </div>

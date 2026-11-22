@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { Award } from 'lucide-react';
 import NetworkBackground from '../components/NetworkBackground';
 import ArticleContent from '../components/ArticleContent';
 import PageSectionsRenderer from '../components/PageSectionsRenderer';
+import { CertificationsSection } from '../components/CertificationsSection';
 import { useI18n } from '../contexts/I18nContext';
 import { PageContent } from '../types';
 import { fetchPageById } from '../utils/api';
@@ -16,7 +16,6 @@ import {
 
 export default function About() {
   const { t, language } = useI18n();
-  const [failedImages, setFailedImages] = useState<Record<string, boolean>>({});
   const [customAbout, setCustomAbout] = useState<PageContent | null>(null);
 
   useEffect(() => {
@@ -31,27 +30,54 @@ export default function About() {
     };
   }, []);
 
-  const handleImageError = (key: string) => {
-    setFailedImages((prev) => ({ ...prev, [key]: true }));
-  };
-
   const hasCustomConfig = Boolean(customAbout?.aboutConfig);
   const aboutConfig = mergeAboutConfig(customAbout?.aboutConfig);
 
   const heroTitle =
-    customAbout?.title?.trim() || (language === 'en' ? t('about.title') : 'Sobre Mim');
+    language === 'en' ? t('about.title') : (customAbout?.title?.trim() || t('about.title'));
   const heroSubtitle =
-    customAbout?.subtitle !== undefined && customAbout.subtitle.trim()
-      ? customAbout.subtitle
-      : t('about.subtitle');
+    language === 'en'
+      ? t('about.subtitle')
+      : (customAbout?.subtitle !== undefined && customAbout.subtitle.trim()
+          ? customAbout.subtitle
+          : t('about.subtitle'));
 
   useSeo({
     title: `${heroTitle} | Humberto Jezus – Enterprise Cloud Architect & MCT`,
     description: heroSubtitle,
   });
-  const mainBodyContent = customAbout?.content?.trim()
-    ? customAbout.content
-    : DEFAULT_ABOUT_CONTENT;
+
+  const mainBodyContent =
+    language === 'en'
+      ? `<p>${t('about.p1')}</p><p>${t('about.p2')}</p><p>${t('about.p3')}</p>`
+      : (customAbout?.content?.trim() || DEFAULT_ABOUT_CONTENT);
+
+  // Localized specialties
+  const specialtiesList =
+    language === 'en'
+      ? [
+          {
+            icon: 'shield' as const,
+            title: t('about.spec1Title'),
+            description: t('about.spec1Desc'),
+          },
+          {
+            icon: 'cloud' as const,
+            title: t('about.spec2Title'),
+            description: t('about.spec2Desc'),
+          },
+          {
+            icon: 'chart' as const,
+            title: t('about.spec3Title'),
+            description: t('about.spec3Desc'),
+          },
+          {
+            icon: 'code' as const,
+            title: t('about.spec4Title'),
+            description: t('about.spec4Desc'),
+          },
+        ]
+      : aboutConfig.specialties;
 
   return (
     <div className="bg-[#faf9f8] min-h-screen font-sans pb-28">
@@ -90,15 +116,17 @@ export default function About() {
       </div>
 
       {/* Specialties */}
-      {aboutConfig.showSpecialties && aboutConfig.specialties.length > 0 && (
+      {aboutConfig.showSpecialties && specialtiesList.length > 0 && (
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-24">
           <div className="mx-auto max-w-2xl text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a]">
-              {hasCustomConfig ? aboutConfig.specialtiesTitle : t('about.specialties')}
+              {language === 'en'
+                ? t('about.specialties')
+                : (hasCustomConfig ? aboutConfig.specialtiesTitle : t('about.specialties'))}
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {aboutConfig.specialties.map((spec, index) => {
+            {specialtiesList.map((spec, index) => {
               const Icon = PAGE_ICON_MAP[spec.icon] || PAGE_ICON_MAP.shield;
               return (
                 <motion.div
@@ -123,63 +151,45 @@ export default function About() {
         </div>
       )}
 
-      {/* Certifications */}
-      {aboutConfig.showCertifications && aboutConfig.certifications.length > 0 && (
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-24">
-          <div className="mx-auto max-w-2xl text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a]">
-              {hasCustomConfig ? aboutConfig.certificationsTitle : t('about.certs')}
-            </h2>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
-            {aboutConfig.certifications.map((cert, i) => {
-              const errKey = `${cert.name}-${i}`;
-              return (
-                <motion.div
-                  key={errKey}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: i * 0.06 }}
-                  className="bg-white border border-gray-200 rounded-xl p-6 flex flex-col items-center gap-4 shadow-sm hover:shadow-md transition-shadow text-center"
-                >
-                  {cert.imageUrl && !failedImages[errKey] ? (
-                    <img
-                      src={cert.imageUrl}
-                      alt={cert.name}
-                      onError={() => handleImageError(errKey)}
-                      className="w-24 h-24 object-contain drop-shadow-sm"
-                      referrerPolicy="no-referrer"
-                    />
-                  ) : (
-                    <div className="relative w-24 h-24 flex flex-col items-center justify-center rounded-full bg-blue-50/50 border border-blue-100">
-                      <Award className="h-10 w-10 text-[#0067b8]" />
-                      <span className="absolute bottom-1 text-xs font-bold text-[#0067b8] tracking-wider">
-                        CERT
-                      </span>
-                    </div>
-                  )}
-                  <span className="font-bold text-[#1a1a1a] text-base leading-tight">
-                    {cert.name}
-                  </span>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      )}
+      {/* 20 Validated Certifications Section */}
+      <div className="mt-20">
+        <CertificationsSection />
+      </div>
 
       {/* Community */}
       {aboutConfig.showCommunity && aboutConfig.community.length > 0 && (
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-24">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-20">
           <div className="mx-auto max-w-2xl text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a]">
-              {hasCustomConfig ? aboutConfig.communityTitle : t('about.community')}
+              {language === 'en'
+                ? t('about.community')
+                : (hasCustomConfig ? aboutConfig.communityTitle : t('about.community'))}
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {aboutConfig.community.map((block, idx) => {
               const Icon = PAGE_ICON_MAP[block.icon] || PAGE_ICON_MAP.rocket;
+              const isAzureTar = block.title.toLowerCase().includes('azure training');
+              const isReactor = block.title.toLowerCase().includes('reactor');
+
+              const blockDesc =
+                language === 'en'
+                  ? isAzureTar
+                    ? t('about.azureTar1')
+                    : isReactor
+                    ? t('about.reactor1')
+                    : block.description
+                  : block.description;
+
+              const blockHighlights =
+                language === 'en'
+                  ? isAzureTar
+                    ? [t('about.azureTar2'), t('about.azureTar3'), t('about.azureTar4')]
+                    : isReactor
+                    ? [t('about.reactor2')]
+                    : block.highlights
+                  : block.highlights;
+
               return (
                 <motion.div
                   key={`${block.title}-${idx}`}
@@ -194,14 +204,14 @@ export default function About() {
                     </div>
                     <h3 className="text-2xl font-bold text-[#1a1a1a]">{block.title}</h3>
                   </div>
-                  {block.description && (
+                  {blockDesc && (
                     <p className="text-base font-medium text-[#4a4a4a] mb-6 leading-relaxed">
-                      {block.description}
+                      {blockDesc}
                     </p>
                   )}
-                  {block.highlights && block.highlights.length > 0 && (
+                  {blockHighlights && blockHighlights.length > 0 && (
                     <ul className="space-y-3">
-                      {block.highlights.map((item, i) => (
+                      {blockHighlights.map((item, i) => (
                         <li
                           key={i}
                           className="flex items-start gap-2.5 text-base font-semibold text-[#242424]"
