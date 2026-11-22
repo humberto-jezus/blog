@@ -25,7 +25,9 @@ RUN npm ci --omit=dev && npm cache clean --force
 
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/dist-server ./dist-server
-COPY --from=builder /app/data ./data
+COPY --from=builder --chown=node:node /app/data ./data
+
+RUN chown -R node:node /app
 
 # Security: run as non-root user
 USER node
