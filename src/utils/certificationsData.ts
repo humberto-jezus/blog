@@ -85,7 +85,7 @@ export const CERTIFICATIONS_LIST: CertificationItem[] = [
     category: 'trainer-skills',
     badgeLevel: 'applied-skills',
     issuer: 'Microsoft',
-    badgeImage: '/badges/microsoft-applied-skills.png',
+    badgeImage: '/badges/microsoft-applied-skills.svg',
   },
   {
     id: 'applied-azure-mgmt',
@@ -97,7 +97,7 @@ export const CERTIFICATIONS_LIST: CertificationItem[] = [
     category: 'trainer-skills',
     badgeLevel: 'applied-skills',
     issuer: 'Microsoft',
-    badgeImage: '/badges/microsoft-applied-skills.png',
+    badgeImage: '/badges/microsoft-applied-skills.svg',
   },
   {
     id: 'applied-ai-agents',
@@ -109,7 +109,7 @@ export const CERTIFICATIONS_LIST: CertificationItem[] = [
     category: 'trainer-skills',
     badgeLevel: 'applied-skills',
     issuer: 'Microsoft',
-    badgeImage: '/badges/microsoft-applied-skills.png',
+    badgeImage: '/badges/microsoft-applied-skills.svg',
   },
 
   // 3. FinOps
