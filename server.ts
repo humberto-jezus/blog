@@ -27,7 +27,12 @@ const SESSION_SECRET =
   cleanEnv(process.env.BLOG_SESSION_SECRET) ||
   crypto.createHash('sha256').update(`${ADMIN_EMAIL}:${process.env.GEMINI_API_KEY || 'local-dev-salt'}`).digest('hex');
 
-const DATA_DIR = cleanEnv(process.env.BLOG_DATA_DIR) || path.join(__dirname, 'data');
+const DATA_DIR =
+  cleanEnv(process.env.BLOG_DATA_DIR) ||
+  [path.resolve(process.cwd(), 'data'), path.resolve(__dirname, '../data'), path.resolve(__dirname, 'data')].find((p) =>
+    fs.existsSync(p)
+  ) ||
+  path.resolve(process.cwd(), 'data');
 const DB_FILE = path.join(DATA_DIR, 'blog-db.json');
 const AZURE_STORAGE_ACCOUNT_URL = cleanEnv(process.env.AZURE_STORAGE_ACCOUNT_URL);
 const AZURE_STORAGE_CONTAINER = cleanEnv(process.env.AZURE_STORAGE_CONTAINER) || 'blog-data';
@@ -1025,7 +1030,10 @@ ${JSON.stringify(fields)}`;
     });
     app.use(vite.middlewares);
   } else {
-    const distPath = path.resolve(__dirname, 'dist');
+    const distPath =
+      [path.resolve(process.cwd(), 'dist'), path.resolve(__dirname, '../dist'), path.resolve(__dirname, 'dist')].find(
+        (p) => fs.existsSync(p)
+      ) || path.resolve(process.cwd(), 'dist');
     const indexHtmlPath = path.join(distPath, 'index.html');
     const baseIndexHtml = fs.existsSync(indexHtmlPath) ? fs.readFileSync(indexHtmlPath, 'utf8') : '';
 
