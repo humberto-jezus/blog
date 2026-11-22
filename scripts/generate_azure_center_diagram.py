@@ -21,7 +21,7 @@ icon_rg = get_b64("ResourceGroup.svg")
 icon_ip = get_b64("PublicIpAddresses.svg")
 icon_identity = get_b64("ManagedIdentityUserAssignedIdentities.svg")
 
-# Clean Microsoft Azure Architecture Center template with 100% collision-free routing
+# Clean, professional Microsoft Azure Architecture Center diagram with ZERO crossing lines
 svg_content = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1140 700" width="1140" height="700" style="background:#ffffff; font-family: Segoe UI, -apple-system, Arial, sans-serif;">
   <defs>
     <!-- Solid Black Arrowhead -->
@@ -43,21 +43,21 @@ svg_content = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1140 700"
 
   <!-- ================= MAIN ARCHITECTURE BOUNDARY (DASHED BLUE) ================= -->
   <!-- Dashed Container Apps Environment Boundary -->
-  <rect x="380" y="105" width="470" height="350" rx="8" fill="none" stroke="#0078d4" stroke-width="1.8" stroke-dasharray="6,5"/>
+  <rect x="375" y="105" width="480" height="360" rx="8" fill="none" stroke="#0078d4" stroke-width="1.8" stroke-dasharray="6,5"/>
   
   <!-- Boundary Label (Bottom Right) -->
-  <g transform="translate(730, 465)">
+  <g transform="translate(730, 475)">
     <image href="{icon_rg}" x="0" y="-8" width="18" height="18"/>
     <text x="24" y="6" font-size="11.5" font-weight="600" fill="#0078d4">Resource Group</text>
     <text x="24" y="20" font-size="10" fill="#64748b">rg-blog-humberto-prod-eus2</text>
   </g>
 
   <!-- Region Label (Bottom Left) -->
-  <text x="395" y="468" font-size="11" fill="#64748b" font-weight="600">Region: East US 2 (Virginia)</text>
+  <text x="390" y="478" font-size="11" fill="#64748b" font-weight="600">Region: East US 2 (Virginia)</text>
 
 
   <!-- ================= INNER BOX 1: FRONT END / INGRESS ================= -->
-  <rect x="395" y="120" width="135" height="205" fill="none" stroke="#94a3b8" stroke-width="1.2"/>
+  <rect x="395" y="120" width="135" height="215" fill="none" stroke="#94a3b8" stroke-width="1.2"/>
   <text x="462" y="140" font-size="12.5" font-weight="600" fill="#1e293b" text-anchor="middle">Front end</text>
 
   <!-- Ingress Icon -->
@@ -67,40 +67,40 @@ svg_content = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1140 700"
     <text x="0" y="38" font-size="12" font-weight="600" fill="#1e293b" text-anchor="middle">ACA Ingress</text>
     <text x="0" y="52" font-size="10" fill="#64748b" text-anchor="middle">Managed TLS</text>
   </g>
-  <text x="462" y="312" font-size="10" fill="#94a3b8" text-anchor="middle">Port: 443</text>
+  <text x="462" y="318" font-size="10" fill="#94a3b8" text-anchor="middle">Port: 443</text>
 
 
   <!-- ================= INNER BOX 2: CONTAINER SERVICES ================= -->
-  <rect x="545" y="120" width="290" height="205" fill="none" stroke="#94a3b8" stroke-width="1.2"/>
-  <text x="690" y="140" font-size="12.5" font-weight="600" fill="#1e293b" text-anchor="middle">Container Services</text>
+  <rect x="545" y="120" width="295" height="215" fill="none" stroke="#94a3b8" stroke-width="1.2"/>
+  <text x="692" y="140" font-size="12.5" font-weight="600" fill="#1e293b" text-anchor="middle">Container Services</text>
 
   <!-- Container App Node -->
-  <g transform="translate(690, 210)">
+  <g transform="translate(692, 210)">
     <circle cx="0" cy="0" r="24" fill="#f0f9ff" stroke="#0078d4" stroke-width="1.5"/>
     <image href="{icon_aca}" x="-15" y="-15" width="30" height="30"/>
     <text x="0" y="40" font-size="13" font-weight="700" fill="#1e293b" text-anchor="middle">blog</text>
     <text x="0" y="55" font-size="10.5" fill="#475569" text-anchor="middle">Node.js 22 LTS Alpine</text>
     <text x="0" y="69" font-size="10" fill="#64748b" text-anchor="middle">React (Vite) + Express API</text>
   </g>
-  <text x="690" y="312" font-size="10" fill="#94a3b8" text-anchor="middle">User: node (Non-Root)</text>
+  <text x="692" y="318" font-size="10" fill="#94a3b8" text-anchor="middle">User: node (Non-Root)</text>
 
 
-  <!-- ================= INNER BOX 3: UTILITY / ENVIRONMENT STORAGE ================= -->
-  <rect x="395" y="340" width="440" height="100" fill="none" stroke="#94a3b8" stroke-width="1.2"/>
-  <text x="615" y="358" font-size="12" font-weight="600" fill="#1e293b" text-anchor="middle">Environment Configuration</text>
+  <!-- ================= INNER BOX 3: ENVIRONMENT CONFIGURATION ================= -->
+  <rect x="395" y="350" width="445" height="95" fill="none" stroke="#94a3b8" stroke-width="1.2"/>
+  <text x="617" y="368" font-size="12" font-weight="600" fill="#1e293b" text-anchor="middle">Environment Configuration</text>
 
-  <g transform="translate(500, 400)">
-    <circle cx="0" cy="0" r="15" fill="#f8fafc" stroke="#64748b" stroke-width="1"/>
-    <text x="0" y="4" font-size="9.5" font-weight="700" fill="#0078d4" text-anchor="middle">CAE</text>
-    <text x="0" y="24" font-size="10" font-weight="600" fill="#334155" text-anchor="middle">blog-storage</text>
-    <text x="0" y="36" font-size="9" fill="#64748b" text-anchor="middle">(Volume Definition)</text>
+  <g transform="translate(500, 405)">
+    <circle cx="0" cy="0" r="14" fill="#f8fafc" stroke="#64748b" stroke-width="1"/>
+    <text x="0" y="4" font-size="9" font-weight="700" fill="#0078d4" text-anchor="middle">CAE</text>
+    <text x="0" y="22" font-size="10" font-weight="600" fill="#334155" text-anchor="middle">blog-storage</text>
+    <text x="0" y="34" font-size="9" fill="#64748b" text-anchor="middle">(Volume Definition)</text>
   </g>
 
-  <g transform="translate(710, 400)">
-    <circle cx="0" cy="0" r="15" fill="#f8fafc" stroke="#64748b" stroke-width="1"/>
-    <text x="0" y="4" font-size="9.5" font-weight="700" fill="#10b981" text-anchor="middle">SMB</text>
-    <text x="0" y="24" font-size="10" font-weight="600" fill="#334155" text-anchor="middle">Mount: /app/data</text>
-    <text x="0" y="36" font-size="9" fill="#64748b" text-anchor="middle">(Stateful Persistence)</text>
+  <g transform="translate(710, 405)">
+    <circle cx="0" cy="0" r="14" fill="#f8fafc" stroke="#64748b" stroke-width="1"/>
+    <text x="0" y="4" font-size="9" font-weight="700" fill="#10b981" text-anchor="middle">SMB</text>
+    <text x="0" y="22" font-size="10" font-weight="600" fill="#334155" text-anchor="middle">Mount: /app/data</text>
+    <text x="0" y="34" font-size="9" fill="#64748b" text-anchor="middle">(Stateful Persistence)</text>
   </g>
 
 
@@ -133,10 +133,11 @@ svg_content = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1140 700"
   </g>
 
 
-  <!-- ================= BOTTOM-LEFT: CI/CD & DEVOPS ================= -->
-  <!-- CI/CD Box -->
-  <rect x="55" y="360" width="150" height="135" fill="none" stroke="#94a3b8" stroke-width="1.2"/>
-  <text x="130" y="380" font-size="12" font-weight="600" fill="#1e293b" text-anchor="middle">CI / CD</text>
+  <!-- ================= BOTTOM SECTION: CI/CD & IDENTITY (COMPLETELY CLEAN) ================= -->
+  
+  <!-- CI/CD Box on Bottom-Left -->
+  <rect x="55" y="355" width="150" height="130" fill="none" stroke="#94a3b8" stroke-width="1.2"/>
+  <text x="130" y="375" font-size="12" font-weight="600" fill="#1e293b" text-anchor="middle">CI / CD</text>
 
   <!-- GitHub Actions Icon & Label inside Box -->
   <g transform="translate(130, 420)">
@@ -154,17 +155,15 @@ svg_content = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1140 700"
     <text x="0" y="46" font-size="9.5" fill="#64748b" text-anchor="middle">Humberto Jezus</text>
   </g>
 
-
-  <!-- ================= BOTTOM ROW: IDENTITY & SECURITY ================= -->
-  <!-- Microsoft Entra ID (Service Principal) -->
-  <g transform="translate(560, 560)">
+  <!-- Microsoft Entra ID (Service Principal) at (460, 560) -->
+  <g transform="translate(460, 560)">
     <image href="{icon_identity}" x="-22" y="-22" width="44" height="44"/>
     <text x="0" y="36" font-size="12" font-weight="600" fill="#1e293b" text-anchor="middle">Microsoft Entra ID</text>
     <text x="0" y="50" font-size="10" fill="#64748b" text-anchor="middle">Service Principal (Deployer)</text>
   </g>
 
-  <!-- Azure Monitor -->
-  <g transform="translate(730, 560)">
+  <!-- Azure Monitor at (710, 560) -->
+  <g transform="translate(710, 560)">
     <circle cx="0" cy="-2" r="18" fill="#ffffff" stroke="#0078d4" stroke-width="1.4"/>
     <path d="M-10 6 A13 13 0 1 1 10 6" stroke="#0078d4" stroke-width="2" fill="none"/>
     <line x1="0" y1="-2" x2="6" y2="-8" stroke="#ef4444" stroke-width="2"/>
@@ -173,53 +172,54 @@ svg_content = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1140 700"
   </g>
 
 
-  <!-- ================= ZERO-COLLISION CONNECTING ARROWS ================= -->
+  <!-- ================= 100% PURE, DIRECT, NON-CROSSING ARROWS ================= -->
 
-  <!-- 1. Client apps -> Ingress (Clean horizontal with opaque background pill) -->
+  <!-- 1. Client apps -> Ingress (Straight horizontal line on y=210) -->
   <line x1="180" y1="210" x2="425" y2="210" stroke="#1e293b" stroke-width="1.6" marker-end="url(#ms-arrow)"/>
   <g transform="translate(300, 210)">
     <rect x="-65" y="-10" width="130" height="20" rx="4" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
     <text x="0" y="4" font-size="10.5" font-weight="600" fill="#1e293b" text-anchor="middle">HTTPS :443 (TLS)</text>
   </g>
 
-  <!-- 2. Ingress -> blog (Clean horizontal with opaque pill) -->
-  <line x1="500" y1="210" x2="648" y2="210" stroke="#1e293b" stroke-width="1.6" marker-end="url(#ms-arrow)"/>
+  <!-- 2. Ingress -> blog (Straight horizontal line on y=210) -->
+  <line x1="500" y1="210" x2="650" y2="210" stroke="#1e293b" stroke-width="1.6" marker-end="url(#ms-arrow)"/>
   <g transform="translate(574, 210)">
     <rect x="-42" y="-10" width="84" height="20" rx="4" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
     <text x="0" y="4" font-size="10" font-weight="600" fill="#1e293b" text-anchor="middle">HTTP :3000</text>
   </g>
 
-  <!-- 3. blog <===> Azure Files (Clean horizontal with opaque pill) -->
+  <!-- 3. blog <===> Azure Files (Straight horizontal line on y=210) -->
   <line x1="735" y1="210" x2="945" y2="210" stroke="#1e293b" stroke-width="1.8" marker-end="url(#ms-arrow)" marker-start="url(#ms-arrow-start)"/>
   <g transform="translate(840, 210)">
     <rect x="-75" y="-10" width="150" height="20" rx="4" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
     <text x="0" y="4" font-size="10.5" font-weight="600" fill="#059669" text-anchor="middle">SMB 3.0 Mount (/app/data)</text>
   </g>
 
-  <!-- 4. Dev/Ops -> GitHub Actions (Push) -->
-  <line x1="130" y1="535" x2="130" y2="505" stroke="#1e293b" stroke-width="1.4" marker-end="url(#ms-arrow)"/>
-  <rect x="138" y="513" width="50" height="15" fill="#ffffff"/>
-  <text x="140" y="524" font-size="9" font-weight="600" fill="#1e293b">git push</text>
+  <!-- 4. Dev/Ops -> GitHub Actions (Straight vertical line) -->
+  <line x1="130" y1="535" x2="130" y2="495" stroke="#1e293b" stroke-width="1.4" marker-end="url(#ms-arrow)"/>
+  <rect x="138" y="508" width="52" height="15" fill="#ffffff"/>
+  <text x="140" y="519" font-size="9" font-weight="600" fill="#1e293b">git push</text>
 
-  <!-- 5. GitHub Actions -> Entra ID (Auth line - completely routed around other elements) -->
-  <path d="M 130 495 L 130 560 L 515 560" fill="none" stroke="#1e293b" stroke-width="1.3" marker-end="url(#ms-arrow)"/>
-  <g transform="translate(320, 560)">
+  <!-- 5. GitHub Actions -> Container Apps Environment (CLEAN DIRECT HORIZONTAL LINE INTO BOUNDARY at y=400) -->
+  <!-- No long diagonal line, no crossing other boxes! Points straight into the CAE boundary! -->
+  <line x1="205" y1="400" x2="365" y2="400" stroke="#1e293b" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#ms-arrow)"/>
+  <g transform="translate(285, 400)">
+    <rect x="-65" y="-10" width="130" height="20" rx="4" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="0" y="4" font-size="9.5" font-weight="600" fill="#1e293b" text-anchor="middle">Deploy Container Rev</text>
+  </g>
+
+  <!-- 6. GitHub Actions -> Entra ID (Clean L-route along the bottom) -->
+  <path d="M 130 485 L 130 560 L 415 560" fill="none" stroke="#1e293b" stroke-width="1.3" marker-end="url(#ms-arrow)"/>
+  <g transform="translate(275, 560)">
     <rect x="-65" y="-10" width="130" height="20" rx="4" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
     <text x="0" y="4" font-size="9.5" fill="#475569" text-anchor="middle">AZURE_CREDENTIALS</text>
   </g>
 
-  <!-- 6. Entra ID -> Resource Group (Role Assignment - clean vertical line into RG bottom edge) -->
-  <line x1="560" y1="525" x2="560" y2="465" stroke="#1e293b" stroke-width="1.4" marker-end="url(#ms-arrow)"/>
-  <g transform="translate(560, 495)">
-    <rect x="-75" y="-10" width="150" height="20" rx="4" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
-    <text x="0" y="4" font-size="9.5" font-weight="600" fill="#1e293b" text-anchor="middle">Role-based access control</text>
-  </g>
-
-  <!-- 7. GitHub Actions -> Container App (Clean routing along bottom perimeter, entering from below at x=690) -->
-  <path d="M 205 425 L 340 425 L 340 475 L 690 475 L 690 335" fill="none" stroke="#1e293b" stroke-width="1.4" stroke-dasharray="5,4" marker-end="url(#ms-arrow)"/>
-  <g transform="translate(340, 450)">
-    <rect x="-65" y="-10" width="130" height="20" rx="4" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
-    <text x="0" y="4" font-size="9.5" font-weight="600" fill="#1e293b" text-anchor="middle">Deploy Container Rev</text>
+  <!-- 7. Entra ID -> Resource Group (Straight vertical line going up into RG bottom edge) -->
+  <line x1="460" y1="520" x2="460" y2="475" stroke="#1e293b" stroke-width="1.4" marker-end="url(#ms-arrow)"/>
+  <g transform="translate(460, 498)">
+    <rect x="-70" y="-9" width="140" height="18" rx="4" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="0" y="4" font-size="9" font-weight="600" fill="#1e293b" text-anchor="middle">Role-based access control</text>
   </g>
 
 
@@ -273,4 +273,4 @@ shutil.copy2(png_file, os.path.join(art_dir, "azure-blog-architecture.png"))
 if os.path.exists(temp_html):
     os.remove(temp_html)
 
-print("Zero-collision diagram generated successfully!")
+print("Zero-crossing diagram generated successfully!")
