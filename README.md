@@ -1,20 +1,36 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# Humberto Jezus — Technical Blog
 
-# Run and deploy your AI Studio app
+Blog técnico e profissional sobre Engenharia de Software, Arquitetura em Nuvem, Microsoft Azure e Inteligência Artificial.
 
-This contains everything you need to run your app locally.
+🌐 **Acesse online:** [https://www.humbertojezus-techblog.com](https://www.humbertojezus-techblog.com)
 
-View your app in AI Studio: https://ai.studio/apps/be5ea8ce-0612-45e2-a44e-f2f5fc6f61ab
+---
 
-## Run Locally
+## 🚀 Tecnologias
 
-**Prerequisites:**  Node.js
+- **Frontend:** React 19, TypeScript, Tailwind CSS, Vite, Lucide Icons
+- **Backend / API:** Node.js 22 LTS, Express
+- **Cloud & Infraestrutura:** Microsoft Azure Container Apps (ACA — Serverless), Azure DNS, Azure Key Vault
+- **CI/CD:** GitHub Actions com autenticação federada OIDC (Zero-Trust sem senhas)
 
+---
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## 💻 Desenvolvimento Local
+
+```bash
+# 1. Instalar as dependências
+npm install
+
+# 2. Iniciar o servidor de desenvolvimento
+npm run dev
+```
+
+Acesse em: `http://localhost:3000`
+
+---
+
+## 🔒 Segurança & Arquitetura
+
+- **Deploy Zero-Trust:** Sem credenciais fixas no repositório via Microsoft Entra ID OIDC.
+- **SSL Gerenciado:** Certificado TLS/HTTPS automático emitido e renovado pela Microsoft.
+- **Hardening:** Container executado com usuário não-root (`USER node`).
